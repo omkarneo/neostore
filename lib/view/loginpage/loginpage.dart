@@ -184,7 +184,10 @@ class _LoginPageState extends State<LoginPage> {
                             fixedSize: const Size(2, 50),
                             backgroundColor: const Color(0xff9e0100),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, RoutePaths.registerpage);
+                          },
                           child: const Icon(
                             Icons.add,
                             color: Color(0xffffffff),
@@ -204,6 +207,8 @@ class _LoginPageState extends State<LoginPage> {
 
 void loginOrNot(response, context) {
   if (response['status'] == 200) {
+    // Use Shared_Preference here
+
     Navigator.popAndPushNamed(context, RoutePaths.homepage);
   } else if (response['status'] == 401) {
     final snackBar = SnackBar(content: Text("${response["user_msg"]}"));

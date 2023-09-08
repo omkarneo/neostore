@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
+import 'package:neostore/view/registerpage/registerpage.dart';
 import '../../view/homepage/homepage.dart';
 import '../../view/loginpage/loginpage.dart';
 
@@ -7,7 +8,6 @@ class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       // -------------- sub Routes ----------------
-      // -------------- LoginPage Route ------------
       case RoutePaths.login:
         return CupertinoPageRoute(
           builder: (context) => const LoginPage(),
@@ -18,6 +18,12 @@ class AppRouter {
         return CupertinoPageRoute(
           builder: (context) => const HomePage(),
           settings: const RouteSettings(name: RoutePaths.homepage),
+        );
+
+      case RoutePaths.registerpage:
+        return CupertinoPageRoute(
+          builder: (context) => const RegisterPage(),
+          settings: const RouteSettings(name: RoutePaths.registerpage),
         );
 
       // -------------- Default Route -------------
