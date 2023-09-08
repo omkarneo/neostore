@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
 
-import '../../viewmodel/login/provider.dart';
+import '../../viewmodel/login/loginprovider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

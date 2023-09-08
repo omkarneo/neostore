@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../viewmodel/register/registerprovider.dart';
 
 // ignore: must_be_immutable
-class Checkbox1 extends StatefulWidget {
-  Checkbox1({required this.selected, super.key});
-  bool selected;
+class Checkbox1 extends ConsumerStatefulWidget {
+  Checkbox1({super.key, required this.extract});
+
+  Function(bool) extract;
   @override
-  State<Checkbox1> createState() => _Checkbox1State();
+  Checkbox1State createState() => Checkbox1State();
 }
 
-class _Checkbox1State extends State<Checkbox1> {
-  late var select = widget.selected;
+class Checkbox1State extends ConsumerState<Checkbox1> {
+  var select;
   @override
   Widget build(BuildContext context) {
+    select = ref.watch(termsprovider).check;
     return InkWell(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -52,9 +57,8 @@ class _Checkbox1State extends State<Checkbox1> {
         ],
       ),
       onTap: () {
-        setState(() {
-          select = !select;
-        });
+        ref.read(termsprovider).action();
+        widget.extract(ref.watch(termsprovider).check);
       },
     );
   }

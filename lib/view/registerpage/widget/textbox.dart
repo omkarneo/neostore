@@ -20,7 +20,7 @@ class _TextBoxState extends State<TextBox> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+      padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 0),
       child: TextFormField(
         controller: widget.controller,
         style: const TextStyle(color: Colors.white),
