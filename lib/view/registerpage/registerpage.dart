@@ -184,7 +184,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                 ),
                 Padding(
-                    padding: EdgeInsets.only(top: 10, left: 25, right: 20),
+                    padding: EdgeInsets.only(top: 20, left: 25, right: 20),
                     child: Checkbox1(
                       extract: (bool val) {
                         check = val;
@@ -210,21 +210,21 @@ class _RegisterPageState extends State<RegisterPage> {
                         onPressed: () async {
                           print(gender);
                           print(check);
-                          if (_formKey.currentState!.validate()) {
-                            var response =
-                                await ref.read(registerprovider).register({
-                              "first_name": firstname.text,
-                              "last_name": lastname.text,
-                              "email": email.text,
-                              "password": password.text,
-                              "confirm_password": confirmspassword.text,
-                              "gender": gender,
-                              "phone_no": phoneno.text
-                            });
-                            if (context.mounted) {
-                              registerOrNot(response, context);
-                            }
-                          }
+                          // if (_formKey.currentState!.validate()) {
+                          //   var response =
+                          //       await ref.read(registerprovider).register({
+                          //     "first_name": firstname.text,
+                          //     "last_name": lastname.text,
+                          //     "email": email.text,
+                          //     "password": password.text,
+                          //     "confirm_password": confirmspassword.text,
+                          //     "gender": gender,
+                          //     "phone_no": phoneno.text
+                          //   });
+                          //   if (context.mounted) {
+                          //     registerOrNot(response, context);
+                          //   }
+                          // }
                         },
                       ),
                     ),
