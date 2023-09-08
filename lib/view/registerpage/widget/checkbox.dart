@@ -16,7 +16,7 @@ class Checkbox1State extends ConsumerState<Checkbox1> {
   var select;
   @override
   Widget build(BuildContext context) {
-    select = ref.watch(termsprovider).check;
+    select = ref.watch(registerprovider).check;
     return InkWell(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -57,8 +57,8 @@ class Checkbox1State extends ConsumerState<Checkbox1> {
         ],
       ),
       onTap: () {
-        ref.read(termsprovider).action();
-        widget.extract(ref.watch(termsprovider).check);
+        ref.read(registerprovider).checkaction();
+        widget.extract(ref.watch(registerprovider).check);
       },
     );
   }

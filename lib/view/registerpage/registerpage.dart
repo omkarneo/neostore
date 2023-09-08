@@ -119,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                 ),
                 Consumer(builder: (context, ref, child) {
-                  gender = ref.watch(genderprovider).gender;
+                  gender = ref.watch(registerprovider).gender;
                   return Padding(
                     padding: const EdgeInsets.only(top: 5, left: 25, right: 20),
                     child: Row(
@@ -140,7 +140,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             groupValue: gender,
                             onChanged: (value) {
                               //  Set/selected value
-                              ref.read(genderprovider).action(value);
+                              ref.read(registerprovider).genderaction(value);
                             }),
                         const Text(
                           "Male",
@@ -157,7 +157,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             fillColor: MaterialStateColor.resolveWith(
                                 (states) => Colors.white),
                             onChanged: (value) {
-                              ref.read(genderprovider).action(value);
+                              ref.read(registerprovider).genderaction(value);
                             }),
                         const Text(
                           "Female",
@@ -176,9 +176,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: confirmspassword,
                   icon: Icons.mobile_friendly_sharp,
                   validation: (value) {
-                    var emailValid = RegExp(
-                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-                    if (emailValid.hasMatch(value!)) {
+                    var noValid = RegExp(r"^(?:[+0]9)?[0-9]{10}$");
+                    if (noValid.hasMatch(value!)) {
                       return null;
                     }
                     return "Please Enter Valid mail";
@@ -211,17 +210,21 @@ class _RegisterPageState extends State<RegisterPage> {
                         onPressed: () async {
                           print(gender);
                           print(check);
-                          // if (_formKey.currentState!.validate()) {
-                          // var response = await ref
-                          //     .read(loginprovider)
-                          //     .getlogin({
-                          //   "email": email.text,
-                          //   "password": password.text
-                          // });
-                          // if (context.mounted) {
-                          //   loginOrNot(response, context);
-                          // }
-                          // }
+                          if (_formKey.currentState!.validate()) {
+                            var response =
+                                await ref.read(registerprovider).register({
+                              "first_name": firstname.text,
+                              "last_name": lastname.text,
+                              "email": email.text,
+                              "password": password.text,
+                              "confirm_password": confirmspassword.text,
+                              "gender": gender,
+                              "phone_no": phoneno.text
+                            });
+                            if (context.mounted) {
+                              registerOrNot(response, context);
+                            }
+                          }
                         },
                       ),
                     ),
@@ -233,5 +236,12 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+}
+
+void registerOrNot(response, context) {
+  if (response == 200) {
+    final snackBar = SnackBar(content: Text("${response["user_msg"]}"));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

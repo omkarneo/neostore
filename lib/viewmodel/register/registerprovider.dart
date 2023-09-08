@@ -4,25 +4,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../model/register/register_api.dart';
 
 final registerprovider = ChangeNotifierProvider(
-  (ref) => null,
+  (ref) => Register(),
 );
 
-final termsprovider = ChangeNotifierProvider((ref) => Terms());
-
-final genderprovider = ChangeNotifierProvider((ref) => Gender());
-
-class Gender extends ChangeNotifier {
+class Register extends ChangeNotifier {
+  final RegisterApiservices apiservices = RegisterApiservices();
   String gender = "M";
-  void action(val) {
+  bool check = false;
+  void genderaction(val) {
     gender = val;
     notifyListeners();
   }
-}
 
-class Terms extends ChangeNotifier {
-  bool check = false;
-
-  void action() {
+  void checkaction() {
     if (check == false) {
       check = true;
     } else {
@@ -30,10 +24,7 @@ class Terms extends ChangeNotifier {
     }
     notifyListeners();
   }
-}
 
-class Register extends ChangeNotifier {
-  final RegisterApiservices apiservices = RegisterApiservices();
   register(data) async {
     var formdata = FormData.fromMap(data);
     var res = await apiservices.register(formdata);
