@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
 import 'package:neostore/view/registerpage/registerpage.dart';
-import '../../view/homepage/homepage.dart';
+import '../../view/dashboard/dashboard.dart';
 import '../../view/loginpage/loginpage.dart';
 
 class AppRouter {
@@ -16,7 +16,7 @@ class AppRouter {
 
       case RoutePaths.homepage:
         return CupertinoPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => const Dashboard(),
           settings: const RouteSettings(name: RoutePaths.homepage),
         );
 
