@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../model/register/register_api.dart';
 
 final registerprovider = ChangeNotifierProvider(
@@ -26,8 +29,11 @@ class Register extends ChangeNotifier {
   }
 
   register(data) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     var formdata = FormData.fromMap(data);
     var res = await apiservices.register(formdata);
-    return res;
+    data = jsonDecode(res);
+    // prefs.setString("Token", data["data"]["access_token"]);
+    return data;
   }
 }

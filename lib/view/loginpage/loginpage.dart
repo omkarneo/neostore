@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../viewmodel/login/loginprovider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,6 +15,13 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    alreadytoken(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
                 // mainAxisAlignment: MainAxisAlignment.sp,
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   Column(
                     children: [
                       const Padding(
@@ -207,11 +214,17 @@ class _LoginPageState extends State<LoginPage> {
 
 void loginOrNot(response, context) {
   if (response['status'] == 200) {
-    // Use Shared_Preference here
-
-    Navigator.popAndPushNamed(context, RoutePaths.homepage);
+    Navigator.pushNamed(context, RoutePaths.homepage);
   } else if (response['status'] == 401) {
     final snackBar = SnackBar(content: Text("${response["user_msg"]}"));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+}
+
+alreadytoken(context) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var token = prefs.getString("Token");
+  if (token != "") {
+    Navigator.pushNamed(context, RoutePaths.homepage);
   }
 }

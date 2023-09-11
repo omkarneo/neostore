@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+import 'package:neostore/core/utils/staticdata.dart';
+
+class Menutile extends StatefulWidget {
+  final String? name;
+  final IconData? icon;
+  const Menutile({super.key, this.name, this.icon});
+
+  @override
+  State<Menutile> createState() => _MenutileState();
+}
+
+class _MenutileState extends State<Menutile> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 70,
+      height: 60,
+      decoration:
+          BoxDecoration(border: Border.all(width: 1, color: Colors.black)),
+      child: Row(children: [
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Icon(
+            widget.icon,
+            color: Colors.white,
+          ),
+        ),
+        Text(
+          "${widget.name}",
+          style: const TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        // Spacer()
+      ]),
+    );
+  }
+}

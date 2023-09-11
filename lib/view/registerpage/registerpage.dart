@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:neostore/core/Navigation/route_paths.dart';
 import 'package:neostore/view/registerpage/widget/checkbox.dart';
 import 'package:neostore/view/registerpage/widget/textbox.dart';
 
@@ -173,7 +174,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 }),
                 TextBox(
                   label: "Phone Number",
-                  controller: confirmspassword,
+                  controller: phoneno,
                   icon: Icons.mobile_friendly_sharp,
                   validation: (value) {
                     var noValid = RegExp(r"^(?:[+0]9)?[0-9]{10}$");
@@ -208,23 +209,29 @@ class _RegisterPageState extends State<RegisterPage> {
                               TextStyle(fontSize: 30, color: Color(0xffE91C1A)),
                         ),
                         onPressed: () async {
-                          print(gender);
-                          print(check);
-                          // if (_formKey.currentState!.validate()) {
-                          //   var response =
-                          //       await ref.read(registerprovider).register({
-                          //     "first_name": firstname.text,
-                          //     "last_name": lastname.text,
-                          //     "email": email.text,
-                          //     "password": password.text,
-                          //     "confirm_password": confirmspassword.text,
-                          //     "gender": gender,
-                          //     "phone_no": phoneno.text
-                          //   });
-                          //   if (context.mounted) {
-                          //     registerOrNot(response, context);
-                          //   }
-                          // }
+                          if (_formKey.currentState!.validate()) {
+                            if (check == true) {
+                              var response =
+                                  await ref.read(registerprovider).register({
+                                "first_name": firstname.text,
+                                "last_name": lastname.text,
+                                "email": email.text,
+                                "password": password.text,
+                                "confirm_password": confirmspassword.text,
+                                "gender": gender,
+                                "phone_no": phoneno.text
+                              });
+                              if (context.mounted) {
+                                registerOrNot(response, context);
+                              }
+                            } else {
+                              final snackBar = SnackBar(
+                                  content: Text(
+                                      "Without accepting term and condition Registration is not allowed"));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }
+                          }
                         },
                       ),
                     ),
@@ -240,7 +247,13 @@ class _RegisterPageState extends State<RegisterPage> {
 }
 
 void registerOrNot(response, context) {
-  if (response == 200) {
+  // print(response.runtimeType);
+  if (response!['status'] == 200) {
+    final snackBar = SnackBar(content: Text("${response["user_msg"]}"));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    Navigator.pushNamed(context, RoutePaths.homepage);
+  } else if (response['status'] == 422) {
+    // print(response);
     final snackBar = SnackBar(content: Text("${response["user_msg"]}"));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }

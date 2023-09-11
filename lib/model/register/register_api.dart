@@ -11,7 +11,7 @@ class RegisterApiservices {
           contentType: Headers.jsonContentType,
           responseType: ResponseType.json,
         ));
-
+    // print(res.data);
     return res.data;
   }
 }
