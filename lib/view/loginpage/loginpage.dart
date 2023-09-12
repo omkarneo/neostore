@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:neostore/core/utils/shared_preference.dart';
 import '../../viewmodel/login/loginprovider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -214,17 +215,17 @@ class _LoginPageState extends State<LoginPage> {
 
 void loginOrNot(response, context) {
   if (response['status'] == 200) {
-    Navigator.pushNamed(context, RoutePaths.homepage);
+    Navigator.pushNamed(context, RoutePaths.dashboard);
   } else if (response['status'] == 401) {
     final snackBar = SnackBar(content: Text("${response["user_msg"]}"));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
 
-alreadytoken(context) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  var token = prefs.getString("Token");
-  if (token != "") {
-    Navigator.pushNamed(context, RoutePaths.homepage);
-  }
+alreadytoken(context) {
+  SchedulerBinding.instance.addPostFrameCallback((_) {
+    if (LocalPreference.getToken() != "") {
+      Navigator.pushNamed(context, RoutePaths.dashboard);
+    }
+  });
 }

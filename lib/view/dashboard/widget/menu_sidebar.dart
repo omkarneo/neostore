@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:neostore/core/utils/shared_preference.dart';
+import 'package:neostore/viewmodel/dashboard/dashboardprovider.dart';
 
+import '../../../core/Navigation/route_paths.dart';
 import 'menu_tile.dart';
 
 class Menu extends StatefulWidget {
   final slideAnimation;
   final menuScaleAnimation;
+
   const Menu({super.key, this.slideAnimation, this.menuScaleAnimation});
 
   @override
@@ -32,28 +37,33 @@ class _MenuState extends State<Menu> {
                       child: Container(
                         width: 120,
                         height: 120,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
+                                image: NetworkImage(((LocalPreference
+                                            .getphoto()!) ==
+                                        "")
+                                    ? "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                    : LocalPreference.getphoto()!),
                                 fit: BoxFit.cover)),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
                       child: Text(
-                        "Omkar Parekh",
-                        style: TextStyle(
+                        LocalPreference.getname()!,
+                        // "",
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 25,
                             fontWeight: FontWeight.w400),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
                       child: Text(
-                        "omkarparekh@neosoft.com",
-                        style: TextStyle(
+                        LocalPreference.getmail()!,
+                        // "",
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 15,
                             fontWeight: FontWeight.w300),
@@ -64,42 +74,65 @@ class _MenuState extends State<Menu> {
                 SizedBox(
                   height: MediaQuery.sizeOf(context).height / 1.5,
                   child: ListView(
-                    children: const [
+                    children: [
                       Menutile(
                         name: "My Cart",
                         icon: Icons.shopping_cart,
+                        action: () {},
                       ),
                       Menutile(
                         name: "Tables",
                         icon: Icons.table_bar,
+                        action: () {},
                       ),
                       Menutile(
                         name: "Sofas",
                         icon: IconData(0xe242, fontFamily: 'MaterialIcons'),
+                        action: () {},
                       ),
                       Menutile(
                         name: "Chairs",
                         icon: Icons.chair,
+                        action: () {},
                       ),
                       Menutile(
                         name: "Cupboards",
                         icon: IconData(0xe35e, fontFamily: 'MaterialIcons'),
+                        action: () {},
                       ),
                       Menutile(
                         name: "My Account",
                         icon: Icons.person,
+                        action: () {},
                       ),
                       Menutile(
                         name: "Store Locator",
                         icon: Icons.location_on,
+                        action: () {},
                       ),
                       Menutile(
                         name: "My Orders",
                         icon: Icons.paste,
+                        action: () {},
                       ),
-                      Menutile(
-                        name: "Logout",
-                        icon: Icons.logout,
+                      Consumer(
+                        builder: (context, ref, child) => Menutile(
+                          name: "Logout",
+                          icon: Icons.logout,
+                          action: () async {
+                            LocalPreference.deleteToken();
+                            LocalPreference.deletephoto();
+                            LocalPreference.deletename();
+                            LocalPreference.deletemail();
+                            ref.watch(dashboardpro).isCollapsed = true;
+                            // ignore: use_build_context_synchronously
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              RoutePaths.login,
+                              (route) => false,
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),

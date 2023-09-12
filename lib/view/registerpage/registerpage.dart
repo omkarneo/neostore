@@ -251,7 +251,7 @@ void registerOrNot(response, context) {
   if (response!['status'] == 200) {
     final snackBar = SnackBar(content: Text("${response["user_msg"]}"));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    Navigator.pushNamed(context, RoutePaths.homepage);
+    Navigator.pushNamed(context, RoutePaths.dashboard, arguments: response);
   } else if (response['status'] == 422) {
     // print(response);
     final snackBar = SnackBar(content: Text("${response["user_msg"]}"));

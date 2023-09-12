@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/utils/shared_preference.dart';
 import '../../model/register/register_api.dart';
 
 final registerprovider = ChangeNotifierProvider(
@@ -33,7 +34,14 @@ class Register extends ChangeNotifier {
     var formdata = FormData.fromMap(data);
     var res = await apiservices.register(formdata);
     data = jsonDecode(res);
-    // prefs.setString("Token", data["data"]["access_token"]);
+    if (data["status"] == 200) {
+      LocalPreference.setToken(data["data"]["access_token"]);
+      LocalPreference.setphoto(data["data"]["profile_pic"]);
+      LocalPreference.setname(
+          "${data["data"]["first_name"]} ${data["data"]["last_name"]}");
+      LocalPreference.setmail(data["data"]["email"]);
+    }
+
     return data;
   }
 }

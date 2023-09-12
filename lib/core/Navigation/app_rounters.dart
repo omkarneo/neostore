@@ -14,10 +14,10 @@ class AppRouter {
           settings: const RouteSettings(name: RoutePaths.login),
         );
 
-      case RoutePaths.homepage:
+      case RoutePaths.dashboard:
         return CupertinoPageRoute(
           builder: (context) => const Dashboard(),
-          settings: const RouteSettings(name: RoutePaths.homepage),
+          settings: const RouteSettings(name: RoutePaths.dashboard),
         );
 
       case RoutePaths.registerpage:
