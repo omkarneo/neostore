@@ -25,7 +25,7 @@ class _MenutileState extends State<Menutile> {
         //     BoxDecoration(border: Border.all(width: 1, color: Colors.black)),
         child: Row(children: [
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(18.0),
             child: Icon(
               widget.icon,
               color: Colors.white,

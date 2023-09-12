@@ -28,8 +28,7 @@ class _DashboardState extends State<Dashboard>
 
     _controller = AnimationController(vsync: this, duration: duration);
     _scaleAnimation = Tween<double>(begin: 1, end: 0.8).animate(_controller);
-    _menuScaleAnimation =
-        Tween<double>(begin: 0.5, end: 1).animate(_controller);
+    _menuScaleAnimation = Tween<double>(begin: 1, end: 1).animate(_controller);
     _slideAnimation =
         Tween<Offset>(begin: const Offset(-1, 0), end: const Offset(0, 0))
             .animate(_controller);

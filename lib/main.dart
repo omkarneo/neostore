@@ -4,9 +4,9 @@ import 'package:neostore/core/utils/shared_preference.dart';
 import 'package:neostore/view/loginpage/loginpage.dart';
 import 'core/Navigation/app_rounters.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  LocalPreference.init();
+  await LocalPreference.init();
   runApp(const MainApp());
 }
 
