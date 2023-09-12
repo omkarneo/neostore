@@ -51,15 +51,10 @@ class _MenuState extends State<Menu> {
                             child: Container(
                               width: 100,
                               height: 100,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                          // (LocalPreference
-                                          // .getphoto()!) ==
-                                          // "")
-                                          "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                                          // : LocalPreference.getphoto()!
-                                          ),
+                                          "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
                                       fit: BoxFit.cover)),
                             ),
                           ),
