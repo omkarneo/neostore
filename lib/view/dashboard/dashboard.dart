@@ -4,7 +4,7 @@ import 'package:neostore/core/utils/staticdata.dart';
 import 'package:neostore/view/dashboard/widget/menu_sidebar.dart';
 
 import '../../viewmodel/dashboard/dashboardprovider.dart';
-import '../homepage/homepage2.dart';
+import '../homepage/homepage.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
