@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/utils/staticdata.dart';
 import 'package:neostore/view/dashboard/widget/menu_sidebar.dart';
-import 'package:neostore/view/homepage/homepage.dart';
 
 import '../../viewmodel/dashboard/dashboardprovider.dart';
+import '../homepage/homepage2.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -16,7 +16,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard>
     with SingleTickerProviderStateMixin {
   late double screenWidth, screenHeight;
-  final Duration duration = const Duration(milliseconds: 300);
+  final Duration duration = const Duration(milliseconds: 90);
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   late Animation<double> _menuScaleAnimation;
@@ -68,6 +68,7 @@ class _DashboardState extends State<Dashboard>
           bottom: 0,
           left: iscollaped ? 0 : 0.6 * screenWidth,
           right: iscollaped ? 0 : -0.2 * screenWidth,
+          // child: HomePage(controller: _controller),
           child: ScaleTransition(
               scale: _scaleAnimation,
               child: HomePage(

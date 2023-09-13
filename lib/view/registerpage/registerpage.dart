@@ -225,7 +225,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 registerOrNot(response, context);
                               }
                             } else {
-                              final snackBar = SnackBar(
+                              const snackBar = SnackBar(
                                   content: Text(
                                       "Without accepting term and condition Registration is not allowed"));
                               ScaffoldMessenger.of(context)

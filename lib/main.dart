@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/utils/shared_preference.dart';
 import 'package:neostore/view/loginpage/loginpage.dart';
@@ -7,6 +8,9 @@ import 'core/Navigation/app_rounters.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocalPreference.init();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(const MainApp());
 }
 
