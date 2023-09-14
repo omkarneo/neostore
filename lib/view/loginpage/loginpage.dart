@@ -224,7 +224,7 @@ void loginOrNot(response, context) {
 
 alreadytoken(context) {
   SchedulerBinding.instance.addPostFrameCallback((_) {
-    if (LocalPreference.getToken() != "") {
+    if (LocalPreference.getProfile() != "") {
       Navigator.pushNamed(context, RoutePaths.dashboard);
     }
   });

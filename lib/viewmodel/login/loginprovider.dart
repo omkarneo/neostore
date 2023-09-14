@@ -20,13 +20,16 @@ class Login extends ChangeNotifier {
     data = jsonDecode(res);
     if (data["status"] == 200) {
       print(data['data']["profile_pic"]);
-      LocalPreference.setToken(data["data"]["access_token"]);
-      LocalPreference.setphoto((data["data"]["profile_pic"] == null)
-          ? ""
-          : data["data"]["profile_pic"]);
-      LocalPreference.setname(
-          "${data["data"]["first_name"]} ${data["data"]["last_name"]}");
-      LocalPreference.setmail(data["data"]["email"]);
+      Map<String, dynamic> Profile = {
+        "Name": "${data["data"]["first_name"]} ${data["data"]["last_name"]}",
+        "Email": data["data"]["email"],
+        "photo": (data["data"]["profile_pic"] == null)
+            ? ""
+            : data["data"]["profile_pic"],
+        "Token": data["data"]["access_token"]
+      };
+      String encodedMap = json.encode(Profile);
+      LocalPreference.setProfile(encodedMap);
     }
     return data;
   }

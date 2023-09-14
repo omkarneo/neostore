@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
 import 'package:neostore/view/homepage/widget/chairs.dart';
@@ -29,8 +28,8 @@ class _HomePageState extends State<HomePage> {
   ];
   @override
   Widget build(BuildContext context) {
-    var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     return Scaffold(
+      backgroundColor: colorPrimaryText,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: colorPrimary,
@@ -96,27 +95,55 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               flex: 3,
               child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: SizedBox(
-                  width: MediaQuery.sizeOf(context).width,
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          InkWell(
-                            child: TableBox(),
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, RoutePaths.productlist);
-                            },
-                          ),
-                          ChairsBox()
-                        ],
-                      ),
-                      Column(
-                        children: [SofasBox(), CupBoardBox()],
-                      )
-                    ],
+                scrollDirection: Axis.vertical,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: SizedBox(
+                    width: MediaQuery.sizeOf(context).width,
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            InkWell(
+                              child: TableBox(),
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, RoutePaths.productlist,
+                                    arguments: "1");
+                              },
+                            ),
+                            InkWell(
+                              child: ChairsBox(),
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, RoutePaths.productlist,
+                                    arguments: "2");
+                              },
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            InkWell(
+                              child: SofasBox(),
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, RoutePaths.productlist,
+                                    arguments: "3");
+                              },
+                            ),
+                            InkWell(
+                              child: CupBoardBox(),
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, RoutePaths.productlist,
+                                    arguments: "5");
+                              },
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

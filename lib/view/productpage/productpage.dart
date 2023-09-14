@@ -3,17 +3,19 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/utils/staticdata.dart';
-import '../../viewmodel/dashboard/dashboardprovider.dart';
 import '../../viewmodel/product/productspro.dart';
 
 class ProductPage extends StatefulWidget {
-  const ProductPage({super.key});
+  final id;
+  const ProductPage({super.key, this.id});
 
   @override
   State<ProductPage> createState() => _ProductPageState();
 }
 
 class _ProductPageState extends State<ProductPage> {
+  Map types = {"1": "Tables", "2": "Chairs", "3": "Sofas", "5": "Dinning Sets"};
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,32 +23,26 @@ class _ProductPageState extends State<ProductPage> {
         centerTitle: true,
         backgroundColor: colorPrimary,
         shadowColor: Colors.transparent,
-        title: const Text("Tables"),
-        // leading: Consumer(
-        //   builder: (context, ref, child) => IconButton(
-        //     icon: (ref.watch(dashboardpro).isCollapsed)
-        //         ? const Icon(Icons.menu)
-        //         : const Icon(Icons.arrow_back_ios_new_sharp),
-        //     onPressed: () {
-        //       // ref.read(dashboardpro).Collapsed(widget.controller);
-        //     },
-        //   ),
-        // ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_new_sharp,
+            size: 20,
+          ),
+        ),
+        title: Text(types[widget.id]),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))
         ],
       ),
       body: Consumer(builder: (context, ref, child) {
-        // print(ref.read(productprovider).fetchproducts());
         return FutureBuilder(
-            future: ref.read(productprovider).fetchproducts(),
+            future: ref.read(productprovider).fetchproducts(widget.id),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final data = snapshot.data as List;
-                print(data[0].rating.runtimeType);
-                // List<dynamic> data = snapshot.data;
-                // print(data.length);
-
                 return ListView.separated(
                     separatorBuilder: (context, index) => Container(
                           width: MediaQuery.sizeOf(context).width,
@@ -100,13 +96,13 @@ class _ProductPageState extends State<ProductPage> {
                                                 color: colorPrimary),
                                           ),
                                           SizedBox(
-                                            width: 20,
+                                            width: 40,
                                           ),
                                           // Spacer(),
                                           RatingBarIndicator(
                                             rating: data[index].rating,
                                             itemCount: 5,
-                                            itemSize: 30,
+                                            itemSize: 25,
                                             physics:
                                                 const BouncingScrollPhysics(),
                                             itemBuilder: (context, _) =>
@@ -125,7 +121,15 @@ class _ProductPageState extends State<ProductPage> {
                           ),
                         ));
               }
-              return Text("${snapshot}");
+              return Center(
+                child: SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: CircularProgressIndicator(
+                    color: colorPrimary,
+                  ),
+                ),
+              );
             });
       }),
     );

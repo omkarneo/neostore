@@ -10,8 +10,8 @@ final productprovider = ChangeNotifierProvider(
 class Product extends ChangeNotifier {
   final ProductApiservices apiservices = ProductApiservices();
 
-  fetchproducts() async {
-    var res = await apiservices.get();
+  fetchproducts(id) async {
+    var res = await apiservices.get(id);
     var contomap = jsonDecode(res);
     var data = [];
 

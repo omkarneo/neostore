@@ -52,6 +52,7 @@ class _DashboardState extends State<Dashboard>
           Menu(
             slideAnimation: _slideAnimation,
             menuScaleAnimation: _menuScaleAnimation,
+            controller: _controller,
           ),
           dashboard(context)
         ],

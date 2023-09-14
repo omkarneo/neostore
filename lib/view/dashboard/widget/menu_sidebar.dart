@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/utils/shared_preference.dart';
@@ -9,23 +11,24 @@ import 'menu_tile.dart';
 class Menu extends StatefulWidget {
   final slideAnimation;
   final menuScaleAnimation;
+  final controller;
 
-  const Menu({super.key, this.slideAnimation, this.menuScaleAnimation});
+  const Menu(
+      {super.key,
+      this.slideAnimation,
+      this.menuScaleAnimation,
+      this.controller});
 
   @override
   State<Menu> createState() => _MenuState();
 }
 
 class _MenuState extends State<Menu> {
-  var name;
-  var photo;
-  var email;
+  var profile;
 
   @override
   void initState() {
-    name = LocalPreference.getname()!;
-    photo = LocalPreference.getphoto()!;
-    email = LocalPreference.getmail()!;
+    profile = jsonDecode(LocalPreference.getProfile()!);
     super.initState();
   }
 
@@ -37,52 +40,59 @@ class _MenuState extends State<Menu> {
       child: ScaleTransition(
           scale: widget.menuScaleAnimation,
           child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 50),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          ClipOval(
-                            child: Container(
-                              width: 100,
-                              height: 100,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-                                      fit: BoxFit.cover)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 30,
+                ),
+                SizedBox(
+                  width: MediaQuery.sizeOf(context).width / 1.5,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ClipOval(
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
+                                        fit: BoxFit.cover)),
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 7),
-                            child: Text(
-                              name,
-                              // "",
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 7),
+                              child: Text(
+                                profile['Name'],
+                                // "",
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400),
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 7),
-                            child: Text(
-                              email,
-                              // "",
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w300),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 7),
+                              child: Text(
+                                profile["Email"],
+                                // "",
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w300),
+                              ),
                             ),
-                          ),
-                        ]),
+                          ]),
+                    ],
                   ),
-                  SizedBox(
+                ),
+                Consumer(
+                  builder: (context, ref, child) => SizedBox(
                     height: (isPortrait)
                         ? MediaQuery.sizeOf(context).height / 1.5
                         : MediaQuery.sizeOf(context).height / 2.2,
@@ -95,23 +105,47 @@ class _MenuState extends State<Menu> {
                         ),
                         Menutile(
                           name: "Tables",
-                          icon: Icons.table_bar,
-                          action: () {},
+                          icon: Icons.table_restaurant,
+                          action: () {
+                            Navigator.pushNamed(context, RoutePaths.productlist,
+                                arguments: "1");
+                            ref
+                                .watch(dashboardpro)
+                                .Collapsed(widget.controller);
+                          },
                         ),
                         Menutile(
                           name: "Sofas",
-                          icon: IconData(0xe242, fontFamily: 'MaterialIcons'),
-                          action: () {},
+                          icon: Icons.chair,
+                          action: () {
+                            Navigator.pushNamed(context, RoutePaths.productlist,
+                                arguments: "2");
+                            ref
+                                .watch(dashboardpro)
+                                .Collapsed(widget.controller);
+                          },
                         ),
                         Menutile(
                           name: "Chairs",
-                          icon: Icons.chair,
-                          action: () {},
+                          icon: Icons.event_seat,
+                          action: () {
+                            Navigator.pushNamed(context, RoutePaths.productlist,
+                                arguments: "3");
+                            ref
+                                .watch(dashboardpro)
+                                .Collapsed(widget.controller);
+                          },
                         ),
                         Menutile(
-                          name: "Cupboards",
-                          icon: IconData(0xe35e, fontFamily: 'MaterialIcons'),
-                          action: () {},
+                          name: "Dinning Sets",
+                          icon: Icons.dining_rounded,
+                          action: () {
+                            Navigator.pushNamed(context, RoutePaths.productlist,
+                                arguments: "5");
+                            ref
+                                .watch(dashboardpro)
+                                .Collapsed(widget.controller);
+                          },
                         ),
                         Menutile(
                           name: "My Account",
@@ -128,30 +162,25 @@ class _MenuState extends State<Menu> {
                           icon: Icons.paste,
                           action: () {},
                         ),
-                        Consumer(
-                          builder: (context, ref, child) => Menutile(
-                            name: "Logout",
-                            icon: Icons.logout,
-                            action: () async {
-                              LocalPreference.setToken("");
-                              LocalPreference.setphoto("");
-                              LocalPreference.setname("");
-                              LocalPreference.setmail("");
-                              ref.watch(dashboardpro).isCollapsed = true;
-                              // ignore: use_build_context_synchronously
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                RoutePaths.login,
-                                (route) => false,
-                              );
-                            },
-                          ),
+                        Menutile(
+                          name: "Logout",
+                          icon: Icons.logout,
+                          action: () async {
+                            LocalPreference.setProfile("");
+                            ref.watch(dashboardpro).isCollapsed = true;
+                            // ignore: use_build_context_synchronously
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              RoutePaths.login,
+                              (route) => false,
+                            );
+                          },
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           )),
     );

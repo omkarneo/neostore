@@ -28,8 +28,11 @@ class AppRouter {
         );
       case RoutePaths.productlist:
         return CupertinoPageRoute(
-          builder: (context) => const ProductPage(),
-          settings: const RouteSettings(name: RoutePaths.productlist),
+          builder: (context) => ProductPage(
+            id: settings.arguments,
+          ),
+          settings: RouteSettings(
+              name: RoutePaths.productlist, arguments: settings.arguments),
         );
 
       // -------------- Default Route -------------

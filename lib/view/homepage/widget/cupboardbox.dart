@@ -25,9 +25,9 @@ class _CupBoardBoxState extends State<CupBoardBox> {
                 // crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(bottom: 15, left: 50),
+                    padding: EdgeInsets.only(bottom: 15, left: 22),
                     child: Text(
-                      "Cupboard",
+                      "Dinning Sets",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 26,
@@ -42,7 +42,7 @@ class _CupBoardBoxState extends State<CupBoardBox> {
                   Padding(
                     padding: EdgeInsets.only(left: 5.0),
                     child: Icon(
-                      Icons.table_chart,
+                      Icons.dining_rounded,
                       color: Colors.white,
                       size: 125,
                     ),
