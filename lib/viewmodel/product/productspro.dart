@@ -18,8 +18,18 @@ class Product extends ChangeNotifier {
     for (int i = 0; i < contomap['data'].length; i++) {
       var d = contomap['data'][i];
       print(d["rating"].runtimeType);
-      data.add(ProductModel(d["name"], d["producer"], d["cost"],
-          d["product_images"], d["rating"].toDouble()));
+      data.add(ProductModel(
+          d["id"],
+          d["name"],
+          d["producer"],
+          d["cost"],
+          d["product_images"],
+          d["rating"].toDouble(),
+          d["description"],
+          d["created"],
+          d["modified"],
+          d["view_count"],
+          d["product_category_id"]));
     }
     print(data);
     return data;
@@ -27,12 +37,28 @@ class Product extends ChangeNotifier {
 }
 
 class ProductModel {
+  int id;
   String name;
   String producer;
   String product_images;
   double rating;
   int cost;
+  String description;
+  int view_count;
+  String created;
+  String modified;
+  int product_category_id;
 
   ProductModel(
-      this.name, this.producer, this.cost, this.product_images, this.rating);
+      this.id,
+      this.name,
+      this.producer,
+      this.cost,
+      this.product_images,
+      this.rating,
+      this.description,
+      this.created,
+      this.modified,
+      this.view_count,
+      this.product_category_id);
 }

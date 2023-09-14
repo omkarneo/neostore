@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
-import 'package:neostore/view/productpage/productpage.dart';
+import 'package:neostore/view/productlistpage/productlistpage.dart';
 import 'package:neostore/view/registerpage/registerpage.dart';
 import '../../view/dashboard/dashboard.dart';
 import '../../view/loginpage/loginpage.dart';
+import '../../view/productdetailed/productdetailedpage.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -26,6 +27,7 @@ class AppRouter {
           builder: (context) => const RegisterPage(),
           settings: const RouteSettings(name: RoutePaths.registerpage),
         );
+
       case RoutePaths.productlist:
         return CupertinoPageRoute(
           builder: (context) => ProductPage(
@@ -33,6 +35,15 @@ class AppRouter {
           ),
           settings: RouteSettings(
               name: RoutePaths.productlist, arguments: settings.arguments),
+        );
+
+      case RoutePaths.productdetailed:
+        return CupertinoPageRoute(
+          builder: (context) => ProductDetailed(
+            data: settings.arguments,
+          ),
+          settings: RouteSettings(
+              name: RoutePaths.productdetailed, arguments: settings.arguments),
         );
 
       // -------------- Default Route -------------
