@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:neostore/core/utils/staticdata.dart';
 
 class Menutile extends StatefulWidget {
   final String? name;

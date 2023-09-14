@@ -9,6 +9,12 @@ final productprovider = ChangeNotifierProvider(
 
 class Product extends ChangeNotifier {
   final ProductApiservices apiservices = ProductApiservices();
+  int index = 0;
+
+  photoindexchange(val) {
+    index = val;
+    notifyListeners();
+  }
 
   fetchproducts(id) async {
     var res = await apiservices.get(id);
@@ -34,13 +40,32 @@ class Product extends ChangeNotifier {
     print(data);
     return data;
   }
+
+  getdetailed(id) async {
+    var res = await apiservices.getone(id);
+    var contomap = jsonDecode(res);
+    var data = contomap["data"];
+    ProductModel model = ProductModel(
+        data['id'],
+        data['name'],
+        data['producer'],
+        data['cost'],
+        data["product_images"],
+        data["rating"].toDouble(),
+        data["description"],
+        data["created"],
+        data["modified"],
+        data["view_count"],
+        data["product_category_id"]);
+    return model;
+  }
 }
 
 class ProductModel {
   int id;
   String name;
   String producer;
-  String product_images;
+  var product_images;
   double rating;
   int cost;
   String description;

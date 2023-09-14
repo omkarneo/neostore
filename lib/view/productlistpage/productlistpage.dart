@@ -77,7 +77,7 @@ class _ProductPageState extends State<ProductPage> {
                                     children: [
                                       Text(
                                         data[index].name,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w500),
                                       ),
@@ -98,7 +98,7 @@ class _ProductPageState extends State<ProductPage> {
                                                   fontWeight: FontWeight.w500,
                                                   color: colorPrimary),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 40,
                                             ),
                                             // Spacer(),
