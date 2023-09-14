@@ -5,6 +5,7 @@ import 'package:neostore/core/Navigation/route_paths.dart';
 
 import '../../core/utils/staticdata.dart';
 import '../../viewmodel/product/productspro.dart';
+import 'package:intl/intl.dart';
 
 class ProductPage extends StatefulWidget {
   final id;
@@ -16,7 +17,7 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   Map types = {"1": "Tables", "2": "Chairs", "3": "Sofas", "5": "Dinning Sets"};
-
+  var formatter = NumberFormat('#,##,000');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +93,7 @@ class _ProductPageState extends State<ProductPage> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              "Rs. ${data[index].cost}",
+                                              "Rs. ${formatter.format(data[index].cost)}",
                                               style: TextStyle(
                                                   fontSize: 25,
                                                   fontWeight: FontWeight.w500,

@@ -23,7 +23,6 @@ class Product extends ChangeNotifier {
 
     for (int i = 0; i < contomap['data'].length; i++) {
       var d = contomap['data'][i];
-      print(d["rating"].runtimeType);
       data.add(ProductModel(
           d["id"],
           d["name"],
@@ -37,7 +36,6 @@ class Product extends ChangeNotifier {
           d["view_count"],
           d["product_category_id"]));
     }
-    print(data);
     return data;
   }
 

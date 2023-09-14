@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/utils/staticdata.dart';
 import 'package:neostore/viewmodel/product/productspro.dart';
+import 'package:intl/intl.dart';
 
 class PhotoDescription extends ConsumerStatefulWidget {
   final data;
@@ -12,6 +13,7 @@ class PhotoDescription extends ConsumerStatefulWidget {
 }
 
 class _PhotoDescriptionState extends ConsumerState<PhotoDescription> {
+  var formatter = NumberFormat('#,##,000');
   @override
   Widget build(BuildContext context) {
     print(widget.data.product_images.length);
@@ -32,7 +34,7 @@ class _PhotoDescriptionState extends ConsumerState<PhotoDescription> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Rs. ${widget.data.cost}",
+                      "Rs. ${formatter.format(widget.data.cost)}",
                       style: TextStyle(
                           fontSize: 30,
                           color: colorPrimary,
