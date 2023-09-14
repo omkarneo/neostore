@@ -21,6 +21,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ProviderScope(
       child: MaterialApp(
+        title: "NeoSTORE",
         debugShowCheckedModeBanner: false,
         home: LoginPage(),
         onGenerateRoute: AppRouter.generateRoute,

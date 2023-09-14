@@ -29,6 +29,7 @@ class _MenuState extends State<Menu> {
   @override
   void initState() {
     profile = jsonDecode(LocalPreference.getProfile()!);
+    print(profile);
     super.initState();
   }
 

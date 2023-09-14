@@ -48,22 +48,14 @@ class _PhotoDescriptionState extends ConsumerState<PhotoDescription> {
                 Consumer(
                   builder: (context, ref, child) => Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: InteractiveViewer(
-                      boundaryMargin: EdgeInsets.all(1),
-                      minScale: 1,
-                      maxScale: 20,
-                      scaleFactor: 1,
-                      alignment: FractionalOffset.bottomLeft,
-                      scaleEnabled: true,
-                      child: Container(
-                        width: MediaQuery.sizeOf(context).width / 1.5,
-                        height: MediaQuery.sizeOf(context).width / 2,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(widget.data.product_images[
-                                    ref.watch(productprovider).index]["image"]),
-                                fit: BoxFit.fill)),
-                      ),
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width / 1.5,
+                      height: MediaQuery.sizeOf(context).width / 2,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(widget.data.product_images[
+                                  ref.watch(productprovider).index]["image"]),
+                              fit: BoxFit.fill)),
                     ),
                   ),
                 ),
