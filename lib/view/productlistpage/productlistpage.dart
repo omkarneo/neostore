@@ -99,8 +99,10 @@ class _ProductPageState extends State<ProductPage> {
                                                   fontWeight: FontWeight.w500,
                                                   color: colorPrimary),
                                             ),
-                                            const SizedBox(
-                                              width: 40,
+                                            SizedBox(
+                                              width: data[index].cost > 9999
+                                                  ? 25
+                                                  : 40,
                                             ),
                                             // Spacer(),
                                             RatingBarIndicator(
