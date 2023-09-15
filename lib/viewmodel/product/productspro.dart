@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../model/products/product_api.dart';
@@ -10,6 +11,8 @@ final productprovider = ChangeNotifierProvider(
 class Product extends ChangeNotifier {
   final ProductApiservices apiservices = ProductApiservices();
   int index = 0;
+  List allProduct = [];
+  ProductModel? oneProduct;
 
   photoindexchange(val) {
     index = val;
@@ -36,14 +39,16 @@ class Product extends ChangeNotifier {
           d["view_count"],
           d["product_category_id"]));
     }
-    return data;
+    allProduct = data;
+    notifyListeners();
   }
 
   getdetailed(id) async {
     var res = await apiservices.getone(id);
     var contomap = jsonDecode(res);
+    print(contomap);
     var data = contomap["data"];
-    ProductModel model = ProductModel(
+    oneProduct = ProductModel(
         data['id'],
         data['name'],
         data['producer'],
@@ -55,7 +60,15 @@ class Product extends ChangeNotifier {
         data["modified"],
         data["view_count"],
         data["product_category_id"]);
-    return model;
+    notifyListeners();
+  }
+
+  ratting(data, product_category_id) async {
+    var formdata = FormData.fromMap(data);
+    var res = await apiservices.rate(formdata);
+    getdetailed(data["product_id"]);
+    fetchproducts(product_category_id);
+    return jsonDecode(res);
   }
 }
 

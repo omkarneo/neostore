@@ -26,4 +26,10 @@ class ProductApiservices {
 
     return res.data;
   }
+
+  rate(formData) async {
+    var res = await dio.post("$baseurl/trainingapp/api/products/setRating",
+        data: formData);
+    return res.data;
+  }
 }

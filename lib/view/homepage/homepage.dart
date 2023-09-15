@@ -9,6 +9,7 @@ import 'package:neostore/view/homepage/widget/tablebox.dart';
 
 import '../../core/utils/staticdata.dart';
 import '../../viewmodel/dashboard/dashboardprovider.dart';
+import '../../viewmodel/product/productspro.dart';
 
 class HomePage extends StatefulWidget {
   final controller;
@@ -100,49 +101,55 @@ class _HomePageState extends State<HomePage> {
                   scrollDirection: Axis.horizontal,
                   child: SizedBox(
                     width: MediaQuery.sizeOf(context).width,
-                    child: Row(
-                      children: [
-                        Column(
-                          children: [
-                            InkWell(
-                              child: TableBox(),
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, RoutePaths.productlist,
-                                    arguments: "1");
-                              },
-                            ),
-                            InkWell(
-                              child: ChairsBox(),
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, RoutePaths.productlist,
-                                    arguments: "2");
-                              },
-                            )
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            InkWell(
-                              child: SofasBox(),
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, RoutePaths.productlist,
-                                    arguments: "3");
-                              },
-                            ),
-                            InkWell(
-                              child: CupBoardBox(),
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, RoutePaths.productlist,
-                                    arguments: "5");
-                              },
-                            )
-                          ],
-                        )
-                      ],
+                    child: Consumer(
+                      builder: (context, ref, child) => Row(
+                        children: [
+                          Column(
+                            children: [
+                              InkWell(
+                                child: TableBox(),
+                                onTap: () {
+                                  ref.read(productprovider).fetchproducts("1");
+                                  Navigator.pushNamed(
+                                      context, RoutePaths.productlist,
+                                      arguments: "1");
+                                },
+                              ),
+                              InkWell(
+                                child: ChairsBox(),
+                                onTap: () {
+                                  ref.read(productprovider).fetchproducts("2");
+                                  Navigator.pushNamed(
+                                      context, RoutePaths.productlist,
+                                      arguments: "2");
+                                },
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              InkWell(
+                                child: SofasBox(),
+                                onTap: () {
+                                  ref.read(productprovider).fetchproducts("3");
+                                  Navigator.pushNamed(
+                                      context, RoutePaths.productlist,
+                                      arguments: "3");
+                                },
+                              ),
+                              InkWell(
+                                child: CupBoardBox(),
+                                onTap: () {
+                                  ref.read(productprovider).fetchproducts("5");
+                                  Navigator.pushNamed(
+                                      context, RoutePaths.productlist,
+                                      arguments: "5");
+                                },
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),

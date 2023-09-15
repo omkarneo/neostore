@@ -17,56 +17,53 @@ class ProductDetailed extends ConsumerStatefulWidget {
 
 class _ProductDetailedState extends ConsumerState<ProductDetailed> {
   @override
+  void initState() {
+    ref.read(productprovider).getdetailed(widget.data["id"]);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var data = ref.watch(productprovider).oneProduct;
     return Scaffold(
-      backgroundColor: Colors.grey.shade400,
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: colorPrimary,
-        shadowColor: Colors.transparent,
-        leading: IconButton(
-          onPressed: () {
-            ref.read(productprovider).photoindexchange(0);
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios_new_sharp,
-            size: 20,
+        backgroundColor: Colors.grey.shade400,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: colorPrimary,
+          shadowColor: Colors.transparent,
+          leading: IconButton(
+            onPressed: () {
+              ref.read(productprovider).photoindexchange(0);
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new_sharp,
+              size: 20,
+            ),
           ),
+          title: Text(widget.data["name"]),
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded))
+          ],
         ),
-        title: Text(widget.data.name),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded))
-        ],
-      ),
-      body: FutureBuilder(
-        future: ref.read(productprovider).getdetailed(widget.data.id),
-        builder: (context, snapshot) {
-          print(snapshot.data);
-          if (snapshot.hasData) {
-            return Column(
+        body: (data != null && data.id == widget.data["id"])
+            ? Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TopDetailedConatiner(
-                    data: snapshot.data,
-                  ),
-                  PhotoDescription(
-                    data: snapshot.data,
-                  ),
-                  OrderButtons()
-                ]);
-          }
-          return Center(
-            child: SizedBox(
-              width: 50,
-              height: 50,
-              child: CircularProgressIndicator(
-                color: colorPrimary,
-              ),
-            ),
-          );
-        },
-      ),
-    );
+                    TopDetailedConatiner(
+                      data: data,
+                    ),
+                    PhotoDescription(
+                      data: data,
+                    ),
+                    OrderButtons(
+                      data: data,
+                    )
+                  ])
+            : Center(
+                child: CircularProgressIndicator(
+                  color: colorPrimary,
+                ),
+              ));
   }
 }

@@ -18,132 +18,125 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   Map types = {"1": "Tables", "2": "Chairs", "3": "Sofas", "5": "Dinning Sets"};
   var formatter = NumberFormat('#,##,000');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: colorPrimary,
-        shadowColor: Colors.transparent,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios_new_sharp,
-            size: 20,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: colorPrimary,
+          shadowColor: Colors.transparent,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new_sharp,
+              size: 20,
+            ),
           ),
+          title: Text(types[widget.id]),
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))
+          ],
         ),
-        title: Text(types[widget.id]),
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))
-        ],
-      ),
-      body: Consumer(builder: (context, ref, child) {
-        return FutureBuilder(
-            future: ref.read(productprovider).fetchproducts(widget.id),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final data = snapshot.data as List;
-                return ListView.separated(
-                    separatorBuilder: (context, index) => Container(
-                          width: MediaQuery.sizeOf(context).width,
-                          height: 1,
-                          color: Colors.grey,
-                        ),
-                    itemCount: data.length,
-                    itemBuilder: (context, index) => InkWell(
-                          child: SizedBox(
-                            width: MediaQuery.sizeOf(context).width,
-                            height: 100,
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Container(
-                                    width: 80,
-                                    height: 80,
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: NetworkImage(
-                                                data[index].product_images),
-                                            fit: BoxFit.fill)),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 18),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        data[index].name,
-                                        style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      Text(
-                                        data[index].producer,
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.grey.shade700),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 10),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              "Rs. ${formatter.format(data[index].cost)}",
-                                              style: TextStyle(
-                                                  fontSize: 25,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: colorPrimary),
-                                            ),
-                                            SizedBox(
-                                              width: data[index].cost > 9999
-                                                  ? 25
-                                                  : 40,
-                                            ),
-                                            // Spacer(),
-                                            RatingBarIndicator(
-                                              rating: data[index].rating,
-                                              itemCount: 5,
-                                              itemSize: 25,
-                                              physics:
-                                                  const BouncingScrollPhysics(),
-                                              itemBuilder: (context, _) =>
-                                                  const Icon(
-                                                Icons.star,
-                                                color: Colors.amber,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
+        body: Consumer(builder: (context, ref, child) {
+          final data = ref.watch(productprovider).allProduct;
+          // print(data);
+          if (data.isNotEmpty &&
+              data[0].product_category_id.toString() == widget.id) {
+            return ListView.separated(
+                separatorBuilder: (context, index) => Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      height: 1,
+                      color: Colors.grey,
+                    ),
+                itemCount: data.length,
+                itemBuilder: (context, index) => InkWell(
+                      child: SizedBox(
+                        width: MediaQuery.sizeOf(context).width,
+                        height: 100,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                width: 80,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            data[index].product_images),
+                                        fit: BoxFit.fill)),
+                              ),
                             ),
-                          ),
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, RoutePaths.productdetailed,
-                                arguments: data[index]);
-                          },
-                        ));
-              }
-              return Center(
-                child: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: CircularProgressIndicator(
-                    color: colorPrimary,
-                  ),
-                ),
-              );
-            });
-      }),
-    );
+                            Padding(
+                              padding: const EdgeInsets.only(top: 18),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    data[index].name,
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Text(
+                                    data[index].producer,
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey.shade700),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Rs. ${formatter.format(data[index].cost)}",
+                                          style: TextStyle(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.w500,
+                                              color: colorPrimary),
+                                        ),
+                                        SizedBox(
+                                          width:
+                                              data[index].cost > 9999 ? 25 : 40,
+                                        ),
+                                        // Spacer(),
+                                        RatingBarIndicator(
+                                          rating: data[index].rating,
+                                          itemCount: 5,
+                                          itemSize: 25,
+                                          physics:
+                                              const BouncingScrollPhysics(),
+                                          itemBuilder: (context, _) =>
+                                              const Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        ref.watch(productprovider).getdetailed(data[index].id);
+                        Navigator.pushNamed(context, RoutePaths.productdetailed,
+                            arguments: {
+                              "name": data[index].name,
+                              "id": data[index].id
+                            });
+                      },
+                    ));
+          }
+          return Center(
+            child: CircularProgressIndicator(color: colorPrimary),
+          );
+        }));
   }
 }
