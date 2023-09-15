@@ -6,6 +6,7 @@ import 'package:neostore/core/utils/shared_preference.dart';
 import 'package:neostore/viewmodel/dashboard/dashboardprovider.dart';
 
 import '../../../core/Navigation/route_paths.dart';
+import '../../../viewmodel/product/productspro.dart';
 import 'menu_tile.dart';
 
 class Menu extends StatefulWidget {
@@ -102,12 +103,18 @@ class _MenuState extends State<Menu> {
                         Menutile(
                           name: "My Cart",
                           icon: Icons.shopping_cart,
-                          action: () {},
+                          action: () {
+                            Navigator.pushNamed(context, RoutePaths.cartpage);
+                            ref
+                                .watch(dashboardpro)
+                                .Collapsed(widget.controller);
+                          },
                         ),
                         Menutile(
                           name: "Tables",
                           icon: Icons.table_restaurant,
                           action: () {
+                            ref.read(productprovider).fetchproducts("1");
                             Navigator.pushNamed(context, RoutePaths.productlist,
                                 arguments: "1");
                             ref
@@ -119,8 +126,9 @@ class _MenuState extends State<Menu> {
                           name: "Sofas",
                           icon: Icons.chair,
                           action: () {
+                            ref.read(productprovider).fetchproducts("3");
                             Navigator.pushNamed(context, RoutePaths.productlist,
-                                arguments: "2");
+                                arguments: "3");
                             ref
                                 .watch(dashboardpro)
                                 .Collapsed(widget.controller);
@@ -130,8 +138,9 @@ class _MenuState extends State<Menu> {
                           name: "Chairs",
                           icon: Icons.event_seat,
                           action: () {
+                            ref.read(productprovider).fetchproducts("2");
                             Navigator.pushNamed(context, RoutePaths.productlist,
-                                arguments: "3");
+                                arguments: "2");
                             ref
                                 .watch(dashboardpro)
                                 .Collapsed(widget.controller);
@@ -141,6 +150,7 @@ class _MenuState extends State<Menu> {
                           name: "Dinning Sets",
                           icon: Icons.dining_rounded,
                           action: () {
+                            ref.read(productprovider).fetchproducts("5");
                             Navigator.pushNamed(context, RoutePaths.productlist,
                                 arguments: "5");
                             ref

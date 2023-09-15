@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
+import 'package:neostore/view/cartpage/cartpage.dart';
 import 'package:neostore/view/productlistpage/productlistpage.dart';
 import 'package:neostore/view/registerpage/registerpage.dart';
 import '../../view/dashboard/dashboard.dart';
@@ -26,6 +27,12 @@ class AppRouter {
         return CupertinoPageRoute(
           builder: (context) => const RegisterPage(),
           settings: const RouteSettings(name: RoutePaths.registerpage),
+        );
+
+      case RoutePaths.cartpage:
+        return CupertinoPageRoute(
+          builder: (context) => const CartPage(),
+          settings: const RouteSettings(name: RoutePaths.cartpage),
         );
 
       case RoutePaths.productlist:

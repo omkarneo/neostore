@@ -16,7 +16,7 @@ class _CupBoardBoxState extends State<CupBoardBox> {
       padding: const EdgeInsets.all(8.0),
       child: Container(
           color: colorPrimary,
-          width: 180,
+          width: MediaQuery.sizeOf(context).width / 2 - 16,
           height: 180,
           child: const Stack(
             children: [

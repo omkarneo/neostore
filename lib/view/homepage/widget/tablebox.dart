@@ -15,7 +15,7 @@ class _TableBoxState extends State<TableBox> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-          width: 180,
+          width: MediaQuery.sizeOf(context).width / 2 - 16,
           height: 180,
           color: colorPrimary,
           child: const Stack(

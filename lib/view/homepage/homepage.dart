@@ -22,7 +22,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<String> imgList = [
-    "assets/images/1.avif",
+    "assets/images/6.jpg",
     "assets/images/2.jpeg",
     "assets/images/3.jpeg",
     "assets/images/4.jpeg"
