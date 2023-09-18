@@ -13,12 +13,12 @@ final cartprovider = ChangeNotifierProvider(
 class Cart extends ChangeNotifier {
   List cartproduct = [];
   var total = 0;
+  List allorder = [];
   CartApiService apiService = CartApiService();
 
   fetchcartitems(token) async {
     var res = await apiService.fetchcartitemsservice(token);
     var converttomap = jsonDecode(res);
-    print(converttomap);
     if (converttomap['status'] == 200) {
       if (converttomap['data'] != null) {
         cartproduct = converttomap['data'];
@@ -53,5 +53,28 @@ class Cart extends ChangeNotifier {
     fetchcartitems(token);
     notifyListeners();
     return jsonDecode(res);
+  }
+
+  orderitems(data, token) async {
+    var formdata = FormData.fromMap(data);
+    var res = await apiService.orderservice(formdata, token);
+    fetchcartitems(token);
+    orderlist(token);
+    notifyListeners();
+    return jsonDecode(res);
+  }
+
+  orderlist(token) async {
+    var res = await apiService.orderlistservice(token);
+    var converttomap = jsonDecode(res);
+    print(converttomap);
+    if (converttomap['status'] == 200) {
+      if (converttomap['data'] != null) {
+        allorder = converttomap['data'];
+      } else {
+        allorder = [];
+      }
+      notifyListeners();
+    }
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:neostore/core/utils/shared_preference.dart';
 import 'package:neostore/view/cartpage/widget/carttile.dart';
 import 'package:neostore/viewmodel/cart/cartprovider.dart';
 
@@ -76,7 +76,7 @@ class _CartPageState extends ConsumerState<CartPage> {
                     height: 1,
                     color: Colors.grey.shade400,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   ElevatedButton(
@@ -84,7 +84,24 @@ class _CartPageState extends ConsumerState<CartPage> {
                           backgroundColor: colorPrimary,
                           fixedSize:
                               Size(MediaQuery.sizeOf(context).width - 30, 60)),
-                      onPressed: () {},
+                      onPressed: () async {
+                        dynamic snackBar;
+                        var res = await ref.read(cartprovider).orderitems({
+                          'address':
+                              "The Ruby, 29-Senapati Bapat Marg, Dadar (West)"
+                        }, LocalPreference.getToken());
+                        print(res);
+                        if (res["status"] == 200) {
+                          snackBar = SnackBar(
+                            content: Text(res["user_msg"]),
+                          );
+                        } else {
+                          snackBar = const SnackBar(
+                            content: Text("Something Went Wrong"),
+                          );
+                        }
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
                       child: Text(
                         "ORDER NOW",
                         style: TextStyle(color: colorPrimaryText, fontSize: 25),

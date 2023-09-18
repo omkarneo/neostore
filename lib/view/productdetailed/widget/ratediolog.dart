@@ -21,7 +21,7 @@ class _RateDialogState extends State<RateDialog> {
     return Center(
       child: Container(
         width: MediaQuery.sizeOf(context).width / 1.1,
-        height: MediaQuery.sizeOf(context).height / 1.6,
+        height: MediaQuery.sizeOf(context).height / 1.5,
         decoration: BoxDecoration(
             color: colorPrimaryText, borderRadius: BorderRadius.circular(10)),
         child: Padding(

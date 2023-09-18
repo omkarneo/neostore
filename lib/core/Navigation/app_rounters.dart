@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
 import 'package:neostore/view/cartpage/cartpage.dart';
+import 'package:neostore/view/orderpage/orderpage.dart';
 import 'package:neostore/view/productlistpage/productlistpage.dart';
 import 'package:neostore/view/registerpage/registerpage.dart';
 import '../../view/dashboard/dashboard.dart';
@@ -51,6 +52,12 @@ class AppRouter {
           ),
           settings: RouteSettings(
               name: RoutePaths.productdetailed, arguments: settings.arguments),
+        );
+
+      case RoutePaths.orderpage:
+        return CupertinoPageRoute(
+          builder: (context) => const OrderPage(),
+          settings: const RouteSettings(name: RoutePaths.productdetailed),
         );
 
       // -------------- Default Route -------------

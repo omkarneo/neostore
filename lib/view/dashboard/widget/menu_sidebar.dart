@@ -175,7 +175,18 @@ class _MenuState extends State<Menu> {
                         Menutile(
                           name: "My Orders",
                           icon: Icons.paste,
-                          action: () {},
+                          action: () {
+                            ref
+                                .read(cartprovider)
+                                .orderlist(LocalPreference.getToken());
+                            Navigator.pushNamed(
+                              context,
+                              RoutePaths.orderpage,
+                            );
+                            ref
+                                .watch(dashboardpro)
+                                .Collapsed(widget.controller);
+                          },
                         ),
                         Menutile(
                           name: "Logout",

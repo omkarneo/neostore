@@ -107,7 +107,7 @@ class _QuantityDialogState extends State<QuantityDialog> {
                     ),
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
-                        var snackBar;
+                        dynamic snackBar;
                         var res = await ref.watch(cartprovider).addtocart({
                           "product_id": widget.data.id,
                           "quantity": int.parse(quatity.text)
