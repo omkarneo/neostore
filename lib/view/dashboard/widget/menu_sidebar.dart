@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/utils/shared_preference.dart';
+import 'package:neostore/viewmodel/cart/cartprovider.dart';
 import 'package:neostore/viewmodel/dashboard/dashboardprovider.dart';
 
 import '../../../core/Navigation/route_paths.dart';
@@ -104,6 +105,9 @@ class _MenuState extends State<Menu> {
                           name: "My Cart",
                           icon: Icons.shopping_cart,
                           action: () {
+                            ref
+                                .read(cartprovider)
+                                .fetchcartitems(LocalPreference.getToken());
                             Navigator.pushNamed(context, RoutePaths.cartpage);
                             ref
                                 .watch(dashboardpro)
@@ -178,6 +182,8 @@ class _MenuState extends State<Menu> {
                           icon: Icons.logout,
                           action: () async {
                             LocalPreference.setProfile("");
+                            LocalPreference.setToken("");
+
                             ref.watch(dashboardpro).isCollapsed = true;
                             // ignore: use_build_context_synchronously
                             Navigator.pushNamedAndRemoveUntil(

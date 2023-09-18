@@ -19,7 +19,6 @@ class Login extends ChangeNotifier {
     var res = await apiservices.login(formdata);
     data = jsonDecode(res);
     if (data["status"] == 200) {
-      print(data['data']["profile_pic"]);
       Map<String, dynamic> Profile = {
         "Name": "${data["data"]["first_name"]} ${data["data"]["last_name"]}",
         "Email": data["data"]["email"],
@@ -28,6 +27,7 @@ class Login extends ChangeNotifier {
             : data["data"]["profile_pic"],
         "Token": data["data"]["access_token"]
       };
+      LocalPreference.setToken(data["data"]["access_token"]);
       String encodedMap = json.encode(Profile);
       LocalPreference.setProfile(encodedMap);
     }

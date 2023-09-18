@@ -47,19 +47,21 @@ class _ProductDetailedState extends ConsumerState<ProductDetailed> {
           ],
         ),
         body: (data != null && data.id == widget.data["id"])
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                    TopDetailedConatiner(
-                      data: data,
-                    ),
-                    PhotoDescription(
-                      data: data,
-                    ),
-                    OrderButtons(
-                      data: data,
-                    )
-                  ])
+            ? SingleChildScrollView(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TopDetailedConatiner(
+                        data: data,
+                      ),
+                      PhotoDescription(
+                        data: data,
+                      ),
+                      OrderButtons(
+                        data: data,
+                      )
+                    ]),
+              )
             : Center(
                 child: CircularProgressIndicator(
                   color: colorPrimary,
