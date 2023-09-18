@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/utils/shared_preference.dart';
@@ -90,7 +92,7 @@ class _CartPageState extends ConsumerState<CartPage> {
                           'address':
                               "The Ruby, 29-Senapati Bapat Marg, Dadar (West)"
                         }, LocalPreference.getToken());
-                        print(res);
+
                         if (res["status"] == 200) {
                           snackBar = SnackBar(
                             content: Text(res["user_msg"]),
