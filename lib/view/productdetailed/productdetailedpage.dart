@@ -24,7 +24,7 @@ class _ProductDetailedState extends ConsumerState<ProductDetailed> {
 
   @override
   Widget build(BuildContext context) {
-    var data = ref.watch(productprovider).oneProduct;
+    var providerdata = ref.watch(productprovider).oneProduct;
     return Scaffold(
         backgroundColor: Colors.grey.shade400,
         appBar: AppBar(
@@ -46,19 +46,19 @@ class _ProductDetailedState extends ConsumerState<ProductDetailed> {
             IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded))
           ],
         ),
-        body: (data != null && data.id == widget.data["id"])
+        body: (providerdata != null && providerdata.id == widget.data["id"])
             ? SingleChildScrollView(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TopDetailedConatiner(
-                        data: data,
+                        data: providerdata,
                       ),
                       PhotoDescription(
-                        data: data,
+                        data: providerdata,
                       ),
                       OrderButtons(
-                        data: data,
+                        data: providerdata,
                       )
                     ]),
               )
