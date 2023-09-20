@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:neostore/core/Navigation/route_paths.dart';
+import 'package:neostore/core/utils/shared_preference.dart';
 import 'package:neostore/viewmodel/cart/cartprovider.dart';
 
 import '../../core/utils/staticdata.dart';
@@ -26,58 +28,72 @@ class _OrderPageState extends State<OrderPage> {
       ),
       body: Consumer(builder: (context, ref, child) {
         var allorders = ref.watch(cartprovider).allorder;
-        return ListView.separated(
+        return ListView.builder(
           itemCount: allorders.length,
-          separatorBuilder: (context, index) => Container(
-            width: MediaQuery.sizeOf(context).width,
-            height: 1,
-            color: Colors.grey,
-          ),
           itemBuilder: (context, index) {
             var singleorder = allorders[index];
-            return Container(
-              width: MediaQuery.sizeOf(context).width,
-              height: 100,
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Order ID : ${singleorder['id']}",
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            width: 160,
-                            height: 1,
-                            color: Colors.grey,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "Ordered Date : ${singleorder['created']}",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Colors.grey.shade700),
-                          )
-                        ],
+            return Consumer(
+              builder: (context, ref, child) => InkWell(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width,
+                      height: 100,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Order ID : ${singleorder['id']}",
+                                    style: const TextStyle(fontSize: 20),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Container(
+                                    width: 160,
+                                    height: 1,
+                                    color: Colors.grey,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "Ordered Date : ${singleorder['created']}",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.grey.shade700),
+                                  )
+                                ],
+                              ),
+                              Text(
+                                "₹ ${singleorder['cost']}",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.grey.shade700),
+                              )
+                            ]),
                       ),
-                      Text(
-                        "₹ ${singleorder['cost']}",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey.shade700),
-                      )
-                    ]),
+                    ),
+                    Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      height: 1,
+                      color: Colors.grey,
+                    )
+                  ],
+                ),
+                onTap: () {
+                  ref.read(cartprovider).orderdetailed(
+                      LocalPreference.getToken(), singleorder['id']);
+                  Navigator.pushNamed(context, RoutePaths.orderdetailedpage,
+                      arguments: singleorder['id']);
+                },
               ),
             );
           },

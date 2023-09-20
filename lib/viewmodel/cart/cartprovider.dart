@@ -14,6 +14,7 @@ class Cart extends ChangeNotifier {
   List cartproduct = [];
   var total = 0;
   List allorder = [];
+  Map orderdetailedd = {};
   CartApiService apiService = CartApiService();
 
   fetchcartitems(token) async {
@@ -73,6 +74,20 @@ class Cart extends ChangeNotifier {
         allorder = converttomap['data'];
       } else {
         allorder = [];
+      }
+      notifyListeners();
+    }
+  }
+
+  orderdetailed(token, id) async {
+    var res = await apiService.orderdetailedservice(token, id);
+    var converttomap = jsonDecode(res);
+    print(converttomap);
+    if (converttomap['status'] == 200) {
+      if (converttomap['data'] != null) {
+        orderdetailedd = converttomap['data'];
+      } else {
+        orderdetailedd = {};
       }
       notifyListeners();
     }

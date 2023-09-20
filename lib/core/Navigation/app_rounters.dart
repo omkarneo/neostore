@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
+import 'package:neostore/view/address/addresspage.dart';
 import 'package:neostore/view/cartpage/cartpage.dart';
+import 'package:neostore/view/orderdetailedpage/orderdetailedpage.dart';
 import 'package:neostore/view/orderpage/orderpage.dart';
 import 'package:neostore/view/productlistpage/productlistpage.dart';
 import 'package:neostore/view/registerpage/registerpage.dart';
+import '../../view/address/addressadd/addressaddpage.dart';
 import '../../view/dashboard/dashboard.dart';
 import '../../view/loginpage/loginpage.dart';
 import '../../view/productdetailed/productdetailedpage.dart';
@@ -57,7 +60,26 @@ class AppRouter {
       case RoutePaths.orderpage:
         return CupertinoPageRoute(
           builder: (context) => const OrderPage(),
-          settings: const RouteSettings(name: RoutePaths.productdetailed),
+          settings: const RouteSettings(name: RoutePaths.orderpage),
+        );
+      case RoutePaths.orderdetailedpage:
+        return CupertinoPageRoute(
+          builder: (context) => OrderDetailedPage(
+            id: settings.arguments,
+          ),
+          settings: RouteSettings(
+              name: RoutePaths.orderdetailedpage,
+              arguments: settings.arguments),
+        );
+      case RoutePaths.addresspage:
+        return CupertinoPageRoute(
+          builder: (context) => const AddressPage(),
+          settings: const RouteSettings(name: RoutePaths.addresspage),
+        );
+      case RoutePaths.addressaddpage:
+        return CupertinoPageRoute(
+          builder: (context) => const AddressAddPage(),
+          settings: const RouteSettings(name: RoutePaths.addressaddpage),
         );
 
       // -------------- Default Route -------------

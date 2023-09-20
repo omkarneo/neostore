@@ -105,6 +105,10 @@ class _CartdetailedState extends State<Cartdetailed> {
                                     '3',
                                     '4',
                                     '5',
+                                    '6',
+                                    '7',
+                                    '8',
+                                    '9'
                                   ].map<DropdownMenuItem<String>>(
                                       (String value) {
                                     return DropdownMenuItem<String>(

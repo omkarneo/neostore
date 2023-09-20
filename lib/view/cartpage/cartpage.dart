@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:neostore/core/Navigation/route_paths.dart';
 import 'package:neostore/core/utils/shared_preference.dart';
 import 'package:neostore/view/cartpage/widget/carttile.dart';
 import 'package:neostore/viewmodel/cart/cartprovider.dart';
@@ -87,22 +88,23 @@ class _CartPageState extends ConsumerState<CartPage> {
                           fixedSize:
                               Size(MediaQuery.sizeOf(context).width - 30, 60)),
                       onPressed: () async {
-                        dynamic snackBar;
-                        var res = await ref.read(cartprovider).orderitems({
-                          'address':
-                              "The Ruby, 29-Senapati Bapat Marg, Dadar (West)"
-                        }, LocalPreference.getToken());
+                        Navigator.pushNamed(context, RoutePaths.addresspage);
+                        // dynamic snackBar;
+                        // var res = await ref.read(cartprovider).orderitems({
+                        //   'address':
+                        //       "The Ruby, 29-Senapati Bapat Marg, Dadar (West)"
+                        // }, LocalPreference.getToken());
 
-                        if (res["status"] == 200) {
-                          snackBar = SnackBar(
-                            content: Text(res["user_msg"]),
-                          );
-                        } else {
-                          snackBar = const SnackBar(
-                            content: Text("Something Went Wrong"),
-                          );
-                        }
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        // if (res["status"] == 200) {
+                        //   snackBar = SnackBar(
+                        //     content: Text(res["user_msg"]),
+                        //   );
+                        // } else {
+                        //   snackBar = const SnackBar(
+                        //     content: Text("Something Went Wrong"),
+                        //   );
+                        // }
+                        // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
                       child: Text(
                         "ORDER NOW",
