@@ -54,8 +54,7 @@ class _AddressPageState extends State<AddressPage> {
                 return CustomRadioTile(
                   value: ref.watch(addressprovider).alladdress[index]
                       ['address'],
-                  groupvalue: ref.watch(addressprovider).selectedaddress,
-                  ref: ref,
+                  index: index,
                 );
               },
             ),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:neostore/core/utils/staticdata.dart';
+
 import 'package:neostore/viewmodel/address/addresspro.dart';
 
 class CustomRadioTile extends StatefulWidget {
   final value;
-  final groupvalue;
-  final ref;
-  const CustomRadioTile({super.key, this.value, this.groupvalue, this.ref});
+
+  final index;
+  const CustomRadioTile({super.key, this.value, this.index});
 
   @override
   State<CustomRadioTile> createState() => _CustomRadioTileState();
@@ -68,7 +68,12 @@ class _CustomRadioTileState extends State<CustomRadioTile> {
                                         fontWeight: FontWeight.w500),
                                   ),
                                   IconButton(
-                                      onPressed: () {}, icon: Icon(Icons.close))
+                                      onPressed: () {
+                                        ref
+                                            .read(addressprovider)
+                                            .removeaddress(widget.index);
+                                      },
+                                      icon: Icon(Icons.close))
                                 ],
                               ),
                             ),
