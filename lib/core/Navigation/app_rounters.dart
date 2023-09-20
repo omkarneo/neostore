@@ -6,7 +6,7 @@ import 'package:neostore/view/orderdetailedpage/orderdetailedpage.dart';
 import 'package:neostore/view/orderpage/orderpage.dart';
 import 'package:neostore/view/productlistpage/productlistpage.dart';
 import 'package:neostore/view/registerpage/registerpage.dart';
-import '../../view/address/addressadd/addressaddpage.dart';
+import '../../view/addressadd/addressaddpage.dart';
 import '../../view/dashboard/dashboard.dart';
 import '../../view/loginpage/loginpage.dart';
 import '../../view/productdetailed/productdetailedpage.dart';

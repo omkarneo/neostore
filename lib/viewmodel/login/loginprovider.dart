@@ -25,7 +25,8 @@ class Login extends ChangeNotifier {
         "photo": (data["data"]["profile_pic"] == null)
             ? ""
             : data["data"]["profile_pic"],
-        "Token": data["data"]["access_token"]
+        "Token": data["data"]["access_token"],
+        "address": []
       };
       LocalPreference.setToken(data["data"]["access_token"]);
       String encodedMap = json.encode(Profile);

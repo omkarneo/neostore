@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
 import 'package:neostore/core/utils/shared_preference.dart';
 import 'package:neostore/view/cartpage/widget/carttile.dart';
+import 'package:neostore/viewmodel/address/addresspro.dart';
 import 'package:neostore/viewmodel/cart/cartprovider.dart';
 
 import '../../core/utils/staticdata.dart';
@@ -88,6 +89,7 @@ class _CartPageState extends ConsumerState<CartPage> {
                           fixedSize:
                               Size(MediaQuery.sizeOf(context).width - 30, 60)),
                       onPressed: () async {
+                        ref.read(addressprovider).fetchaddress();
                         Navigator.pushNamed(context, RoutePaths.addresspage);
                         // dynamic snackBar;
                         // var res = await ref.read(cartprovider).orderitems({
