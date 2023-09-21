@@ -185,7 +185,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                 ),
                 Padding(
-                    padding: EdgeInsets.only(top: 20, left: 25, right: 20),
+                    padding:
+                        const EdgeInsets.only(top: 20, left: 25, right: 20),
                     child: Checkbox1(
                       extract: (bool val) {
                         check = val;

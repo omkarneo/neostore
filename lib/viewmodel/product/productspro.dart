@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables
+
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +48,6 @@ class Product extends ChangeNotifier {
   getdetailed(id) async {
     var res = await apiservices.getone(id);
     var contomap = jsonDecode(res);
-    print(contomap);
     var data = contomap["data"];
     oneProduct = ProductModel(
         data['id'],
@@ -63,11 +64,11 @@ class Product extends ChangeNotifier {
     notifyListeners();
   }
 
-  ratting(data, product_category_id) async {
+  ratting(data, productcategoryid) async {
     var formdata = FormData.fromMap(data);
     var res = await apiservices.rate(formdata);
     getdetailed(data["product_id"]);
-    fetchproducts(product_category_id);
+    fetchproducts(productcategoryid);
     return jsonDecode(res);
   }
 }

@@ -1,5 +1,6 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Ordertile extends StatefulWidget {
   final data;
@@ -35,7 +36,8 @@ class _OrdertileState extends State<Ordertile> {
               children: [
                 Text(
                   widget.data['prod_name'],
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w400),
                 ),
                 Text(
                   "(${widget.data['prod_cat_name']})",

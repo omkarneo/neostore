@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,7 +39,7 @@ class _ProductPageState extends State<ProductPage> {
           ),
           title: Text(types[widget.id]),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))
+            IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded))
           ],
         ),
         body: Consumer(builder: (context, ref, child) {

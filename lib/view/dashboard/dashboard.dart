@@ -34,6 +34,7 @@ class _DashboardState extends State<Dashboard>
             .animate(_controller);
   }
 
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();

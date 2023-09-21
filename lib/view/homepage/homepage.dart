@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -42,12 +44,12 @@ class _HomePageState extends State<HomePage> {
                 ? const Icon(Icons.menu)
                 : const Icon(Icons.arrow_back_ios_new_sharp),
             onPressed: () {
-              ref.read(dashboardpro).Collapsed(widget.controller);
+              ref.read(dashboardpro).collapsed(widget.controller);
             },
           ),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded))
         ],
       ),
       body: SizedBox(
@@ -107,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                           Column(
                             children: [
                               InkWell(
-                                child: TableBox(),
+                                child: const TableBox(),
                                 onTap: () {
                                   ref.read(productprovider).fetchproducts("1");
                                   Navigator.pushNamed(
@@ -116,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                                 },
                               ),
                               InkWell(
-                                child: ChairsBox(),
+                                child: const ChairsBox(),
                                 onTap: () {
                                   ref.read(productprovider).fetchproducts("2");
                                   Navigator.pushNamed(
@@ -129,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                           Column(
                             children: [
                               InkWell(
-                                child: SofasBox(),
+                                child: const SofasBox(),
                                 onTap: () {
                                   ref.read(productprovider).fetchproducts("3");
                                   Navigator.pushNamed(
@@ -138,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                                 },
                               ),
                               InkWell(
-                                child: CupBoardBox(),
+                                child: const CupBoardBox(),
                                 onTap: () {
                                   ref.read(productprovider).fetchproducts("5");
                                   Navigator.pushNamed(

@@ -18,7 +18,7 @@ class _StoreLocatorState extends State<StoreLocator> {
         backgroundColor: colorPrimary,
         shadowColor: Colors.transparent,
         title: const Text("Store Locator"),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
       ),
     );
   }

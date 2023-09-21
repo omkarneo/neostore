@@ -15,7 +15,6 @@ class Order extends ChangeNotifier {
   orderlist(token) async {
     var res = await apiService.orderlistservice(token);
     var converttomap = jsonDecode(res);
-    print(converttomap);
     if (converttomap['status'] == 200) {
       if (converttomap['data'] != null) {
         allorder = converttomap['data'];
@@ -29,7 +28,6 @@ class Order extends ChangeNotifier {
   orderdetailed(token, id) async {
     var res = await apiService.orderdetailedservice(token, id);
     var converttomap = jsonDecode(res);
-    print(converttomap);
     if (converttomap['status'] == 200) {
       if (converttomap['data'] != null) {
         orderdetailedd = converttomap['data'];

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/utils/shared_preference.dart';
 
-final addressprovider = ChangeNotifierProvider((ref) => address());
+final addressprovider = ChangeNotifierProvider((ref) => Address());
 
-class address extends ChangeNotifier {
+class Address extends ChangeNotifier {
   var alladdress = [];
   var selectedaddress = "";
 

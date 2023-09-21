@@ -6,7 +6,7 @@ final dashboardpro = ChangeNotifierProvider((ref) => DashboardPro());
 class DashboardPro extends ChangeNotifier {
   bool isCollapsed = true;
 
-  void Collapsed(controller) {
+  void collapsed(controller) {
     if (isCollapsed) {
       controller.forward();
     } else {

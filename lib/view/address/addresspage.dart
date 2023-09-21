@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,13 +26,13 @@ class _AddressPageState extends State<AddressPage> {
         centerTitle: true,
         backgroundColor: colorPrimary,
         shadowColor: Colors.transparent,
-        title: Text("Address List"),
+        title: const Text("Address List"),
         actions: [
           IconButton(
               onPressed: () {
                 Navigator.pushNamed(context, RoutePaths.addressaddpage);
               },
-              icon: Icon(Icons.add))
+              icon: const Icon(Icons.add))
         ],
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

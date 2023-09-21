@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
 import 'package:neostore/core/utils/shared_preference.dart';
-import 'package:neostore/viewmodel/cart/cartprovider.dart';
 
 import '../../core/utils/staticdata.dart';
 import '../../viewmodel/order/orderpro.dart';
@@ -24,7 +23,7 @@ class _OrderPageState extends State<OrderPage> {
         shadowColor: Colors.transparent,
         title: const Text("My Orders"),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded))
         ],
       ),
       body: Consumer(builder: (context, ref, child) {

@@ -1,9 +1,10 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/view/orderdetailedpage/widget/ordertile.dart';
 
 import '../../core/utils/staticdata.dart';
-import '../../viewmodel/cart/cartprovider.dart';
 import '../../viewmodel/order/orderpro.dart';
 
 class OrderDetailedPage extends ConsumerStatefulWidget {
@@ -25,7 +26,7 @@ class _OrderDetailedPageState extends ConsumerState<OrderDetailedPage> {
           title: Text(
               "Order ID : ${ref.watch(orderprovider).orderdetailedd['id']}"),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))
+            IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded))
           ],
         ),
         body: (widget.id == ref.watch(orderprovider).orderdetailedd['id'])

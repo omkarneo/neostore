@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -5,7 +7,6 @@ import 'package:neostore/viewmodel/address/addresspro.dart';
 
 class CustomRadioTile extends StatefulWidget {
   final value;
-
   final index;
   const CustomRadioTile({super.key, this.value, this.index});
 
@@ -73,7 +74,7 @@ class _CustomRadioTileState extends State<CustomRadioTile> {
                                             .read(addressprovider)
                                             .removeaddress(widget.index);
                                       },
-                                      icon: Icon(Icons.close))
+                                      icon: const Icon(Icons.close))
                                 ],
                               ),
                             ),

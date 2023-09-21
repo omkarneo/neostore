@@ -17,7 +17,7 @@ class _MenutileState extends State<Menutile> {
       onTap: () {
         widget.action();
       },
-      child: Container(
+      child: SizedBox(
         width: 70,
         height: 60,
         // decoration:

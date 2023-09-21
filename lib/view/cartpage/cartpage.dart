@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
-import 'package:neostore/core/utils/shared_preference.dart';
 import 'package:neostore/view/cartpage/widget/carttile.dart';
 import 'package:neostore/viewmodel/address/addresspro.dart';
 import 'package:neostore/viewmodel/cart/cartprovider.dart';
@@ -32,7 +31,7 @@ class _CartPageState extends ConsumerState<CartPage> {
           shadowColor: Colors.transparent,
           title: const Text("My Cart"),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))
+            IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded))
           ],
         ),
         body: (prodata != null)

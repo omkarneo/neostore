@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -21,7 +23,7 @@ class _CartdetailedState extends State<Cartdetailed> {
       closeOnScroll: true,
       endActionPane: ActionPane(
         extentRatio: 0.2,
-        motion: ScrollMotion(),
+        motion: const ScrollMotion(),
         children: [
           SizedBox(
             width: MediaQuery.sizeOf(context).width * 0.2,
@@ -53,7 +55,7 @@ class _CartdetailedState extends State<Cartdetailed> {
           )
         ],
       ),
-      child: Container(
+      child: SizedBox(
         width: MediaQuery.sizeOf(context).width,
         height: 120,
         child: Row(
@@ -76,7 +78,8 @@ class _CartdetailedState extends State<Cartdetailed> {
                 children: [
                   Text(
                     widget.data.productname,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w400),
                   ),
                   Text(
                     widget.data.productCategory,
