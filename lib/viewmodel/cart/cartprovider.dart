@@ -11,24 +11,32 @@ final cartprovider = ChangeNotifierProvider(
 );
 
 class Cart extends ChangeNotifier {
-  List cartproduct = [];
+  List? cartproduct;
   var total = 0;
   List allorder = [];
   Map orderdetailedd = {};
+  bool cartloadingstate = false;
   CartApiService apiService = CartApiService();
 
   fetchcartitems(token) async {
     var res = await apiService.fetchcartitemsservice(token);
     var converttomap = jsonDecode(res);
+    total = 0;
     if (converttomap['status'] == 200) {
       if (converttomap['data'] != null) {
-        cartproduct = converttomap['data'];
-        total = converttomap["total"];
-      } else {
+        var data = [];
+        for (var element in converttomap['data']) {
+          data.add(CartModel.fromJson(element));
+          total += int.parse(element['product']["sub_total"].toString());
+        }
+        cartproduct = data;
+      } else if (converttomap['message'] == "Cart Empty" &&
+          converttomap['data'] == null) {
         cartproduct = [];
-        total = 0;
+      } else {
+        cartproduct = null;
       }
-
+      cartloadingstate = false;
       notifyListeners();
     }
   }
@@ -43,16 +51,19 @@ class Cart extends ChangeNotifier {
   removeitemcart(data, token) async {
     var formdata = FormData.fromMap(data);
     var res = await apiService.removecartitemservice(formdata, token);
-    fetchcartitems(token);
+    cartloadingstate = true;
     notifyListeners();
+    fetchcartitems(token);
     return jsonDecode(res);
   }
 
   edititemcart(data, token) async {
     var formdata = FormData.fromMap(data);
     var res = await apiService.edititemcartservice(formdata, token);
-    fetchcartitems(token);
+
+    cartloadingstate = true;
     notifyListeners();
+    fetchcartitems(token);
     return jsonDecode(res);
   }
 
@@ -92,4 +103,34 @@ class Cart extends ChangeNotifier {
       notifyListeners();
     }
   }
+}
+
+class CartModel {
+  int? id;
+  int? productid;
+  int? quantity;
+  String? productname;
+  String? productCategory;
+  int? cost;
+  String? productimages;
+  int? alltotal;
+  CartModel(
+      {this.id,
+      this.productid,
+      this.quantity,
+      this.productname,
+      this.cost,
+      this.productimages,
+      this.alltotal,
+      this.productCategory});
+  factory CartModel.fromJson(Map<String, dynamic> json) => CartModel(
+        id: json["id"],
+        productid: json["product_id"],
+        quantity: json['quantity'],
+        productname: json['product']["name"],
+        cost: json['product']["cost"],
+        productCategory: json['product']["product_category"],
+        productimages: json['product']["product_images"],
+        alltotal: json['product']["sub_total"],
+      );
 }

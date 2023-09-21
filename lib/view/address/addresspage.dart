@@ -1,10 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
 import 'package:neostore/view/address/widget/radiotile.dart';
 import 'package:neostore/viewmodel/address/addresspro.dart';
 
+import '../../core/utils/shared_preference.dart';
 import '../../core/utils/staticdata.dart';
+import '../../viewmodel/cart/cartprovider.dart';
 
 class AddressPage extends StatefulWidget {
   const AddressPage({super.key});
@@ -64,26 +68,35 @@ class _AddressPageState extends State<AddressPage> {
           child: Consumer(
             builder: (context, ref, child) => ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: colorPrimary,
+                    backgroundColor:
+                        (ref.watch(addressprovider).selectedaddress == "")
+                            ? Colors.grey
+                            : colorPrimary,
                     fixedSize: Size(MediaQuery.sizeOf(context).width - 30, 60)),
-                onPressed: () async {
-                  // dynamic snackBar;
-                  // var res = await ref.read(cartprovider).orderitems({
-                  //   'address':
-                  //       "The Ruby, 29-Senapati Bapat Marg, Dadar (West)"
-                  // }, LocalPreference.getToken());
+                onPressed: (ref.watch(addressprovider).selectedaddress == "")
+                    ? null
+                    : () async {
+                        dynamic snackBar;
+                        var res = await ref.read(cartprovider).orderitems({
+                          'address': ref.watch(addressprovider).selectedaddress
+                        }, LocalPreference.getToken());
 
-                  // if (res["status"] == 200) {
-                  //   snackBar = SnackBar(
-                  //     content: Text(res["user_msg"]),
-                  //   );
-                  // } else {
-                  //   snackBar = const SnackBar(
-                  //     content: Text("Something Went Wrong"),
-                  //   );
-                  // }
-                  // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                },
+                        if (res["status"] == 200) {
+                          snackBar = SnackBar(
+                            content: Text(res["user_msg"]),
+                          );
+                        } else {
+                          snackBar = const SnackBar(
+                            content: Text("Something Went Wrong"),
+                          );
+                        }
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          RoutePaths.dashboard,
+                          (route) => false,
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
                 child: Text(
                   "PLACE ORDER",
                   style: TextStyle(color: colorPrimaryText, fontSize: 25),

@@ -18,10 +18,12 @@ class CartPage extends ConsumerStatefulWidget {
 }
 
 class _CartPageState extends ConsumerState<CartPage> {
+  int total = 0;
   @override
   Widget build(BuildContext context) {
-    List prodata = ref.watch(cartprovider).cartproduct;
+    List? prodata = ref.watch(cartprovider).cartproduct;
     var total = ref.watch(cartprovider).total;
+    bool loadingstate = ref.watch(cartprovider).cartloadingstate;
 
     return Scaffold(
         appBar: AppBar(
@@ -33,93 +35,88 @@ class _CartPageState extends ConsumerState<CartPage> {
             IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))
           ],
         ),
-        body: (prodata.isNotEmpty)
-            ? Column(
-                children: [
-                  SizedBox(
-                    width: MediaQuery.sizeOf(context).width,
-                    height: MediaQuery.sizeOf(context).height / 1.5,
-                    child: ListView.separated(
-                        itemCount: prodata.length,
-                        separatorBuilder: (context, index) => Container(
-                              height: 1,
-                              color: Colors.grey.shade400,
-                            ),
-                        itemBuilder: (context, index) {
-                          var data = prodata[index];
-                          return Cartdetailed(data: data);
-                        }),
-                  ),
-                  Container(
-                    height: 1,
-                    color: Colors.grey.shade400,
-                  ),
-                  SizedBox(
-                    width: MediaQuery.sizeOf(context).width,
-                    height: 80,
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "TOTAL",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w500),
-                          ),
-                          Text(
-                            "₹ $total",
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 1,
-                    color: Colors.grey.shade400,
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: colorPrimary,
-                          fixedSize:
-                              Size(MediaQuery.sizeOf(context).width - 30, 60)),
-                      onPressed: () async {
-                        ref.read(addressprovider).fetchaddress();
-                        Navigator.pushNamed(context, RoutePaths.addresspage);
-                        // dynamic snackBar;
-                        // var res = await ref.read(cartprovider).orderitems({
-                        //   'address':
-                        //       "The Ruby, 29-Senapati Bapat Marg, Dadar (West)"
-                        // }, LocalPreference.getToken());
+        body: (prodata != null)
+            ? (prodata.isNotEmpty)
+                ? Column(
+                    children: [
+                      (loadingstate)
+                          ? LinearProgressIndicator(
+                              color: colorPrimary,
+                            )
+                          : const SizedBox(),
+                      SizedBox(
+                        width: MediaQuery.sizeOf(context).width,
+                        height: MediaQuery.sizeOf(context).height / 1.5,
+                        child: ListView.separated(
+                            itemCount: prodata.length,
+                            separatorBuilder: (context, index) => Container(
+                                  height: 1,
+                                  color: Colors.grey.shade400,
+                                ),
+                            itemBuilder: (context, index) {
+                              var data = prodata[index];
 
-                        // if (res["status"] == 200) {
-                        //   snackBar = SnackBar(
-                        //     content: Text(res["user_msg"]),
-                        //   );
-                        // } else {
-                        //   snackBar = const SnackBar(
-                        //     content: Text("Something Went Wrong"),
-                        //   );
-                        // }
-                        // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      },
-                      child: Text(
-                        "ORDER NOW",
-                        style: TextStyle(color: colorPrimaryText, fontSize: 25),
-                      ))
-                ],
-              )
-            : (prodata.isEmpty)
-                ? const Center(
+                              return Cartdetailed(data: data);
+                            }),
+                      ),
+                      Container(
+                        height: 1,
+                        color: Colors.grey.shade400,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.sizeOf(context).width,
+                        height: 80,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "TOTAL",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w500),
+                              ),
+                              Text(
+                                "₹ $total",
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 1,
+                        color: Colors.grey.shade400,
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  (loadingstate) ? Colors.grey : colorPrimary,
+                              fixedSize: Size(
+                                  MediaQuery.sizeOf(context).width - 30, 60)),
+                          onPressed: (loadingstate)
+                              ? null
+                              : () async {
+                                  ref.read(addressprovider).fetchaddress();
+                                  Navigator.pushNamed(
+                                      context, RoutePaths.addresspage);
+                                },
+                          child: Text(
+                            "ORDER NOW",
+                            style: TextStyle(
+                                color: colorPrimaryText, fontSize: 25),
+                          ))
+                    ],
+                  )
+                : const Center(
                     child: Text("No Item in Cart"),
                   )
-                : Center(
-                    child: CircularProgressIndicator(color: colorPrimary),
-                  ));
+            : Center(
+                child: CircularProgressIndicator(color: colorPrimary),
+              ));
   }
 }

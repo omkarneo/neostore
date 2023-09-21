@@ -42,9 +42,8 @@ class _CartdetailedState extends State<Cartdetailed> {
                       ),
                     ),
                     onTap: () {
-                      print(widget.data["product"]);
                       ref.read(cartprovider).removeitemcart(
-                          {"product_id": widget.data["product"]["id"]},
+                          {"product_id": widget.data.productid},
                           LocalPreference.getToken());
                     },
                   ),
@@ -66,8 +65,7 @@ class _CartdetailedState extends State<Cartdetailed> {
                 height: 85,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(
-                            widget.data["product"]["product_images"]),
+                        image: NetworkImage(widget.data.productimages),
                         fit: BoxFit.fill)),
               ),
             ),
@@ -77,11 +75,11 @@ class _CartdetailedState extends State<Cartdetailed> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.data["product"]["name"],
+                    widget.data.productname,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
                   ),
                   Text(
-                    widget.data["product"]["product_category"],
+                    widget.data.productCategory,
                     style: TextStyle(fontSize: 15, color: Colors.grey.shade700),
                   ),
                   Consumer(
@@ -98,7 +96,7 @@ class _CartdetailedState extends State<Cartdetailed> {
                               color: Colors.grey.shade300,
                               child: Center(
                                 child: DropdownButton<String>(
-                                  value: "${widget.data["quantity"]}",
+                                  value: "${widget.data.quantity}",
                                   items: <String>[
                                     '1',
                                     '2',
@@ -124,8 +122,7 @@ class _CartdetailedState extends State<Cartdetailed> {
                                   // Step 5.
                                   onChanged: (String? newValue) {
                                     ref.read(cartprovider).edititemcart({
-                                      "product_id": widget.data["product"]
-                                          ["id"],
+                                      "product_id": widget.data.productid,
                                       "quantity": newValue
                                     }, LocalPreference.getToken());
                                   },
@@ -133,7 +130,7 @@ class _CartdetailedState extends State<Cartdetailed> {
                               ),
                             ),
                             Text(
-                              "₹ ${widget.data["product"]["sub_total"]}",
+                              "₹ ${widget.data.alltotal}",
                               style: const TextStyle(fontSize: 18),
                             )
                           ],

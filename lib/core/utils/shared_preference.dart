@@ -4,6 +4,7 @@ class LocalPreference {
   static SharedPreferences? _preferences;
 
   static const _keyprofile = "Profile";
+  static const _keyaddress = "address";
   static const _keytoken = "Token";
   //----------------------------------
   static Future clearAllPreference() => _preferences!.clear();
@@ -22,6 +23,13 @@ class LocalPreference {
       await _preferences!.setString(_keytoken, val!);
   static String? getToken() => _preferences?.getString(_keytoken);
   static Future<bool>? deleteToken() => _preferences?.remove(_keytoken);
+
+  //--------------------------------------------------------------
+  //--------------------------------------------------------------
+  static Future setaddress(String? val) async =>
+      await _preferences!.setString(_keyaddress, val!);
+  static String? getaddress() => _preferences?.getString(_keyaddress);
+  static Future<bool>? deleteaddress() => _preferences?.remove(_keyaddress);
 
   //--------------------------------------------------------------
 }

@@ -11,21 +11,28 @@ class address extends ChangeNotifier {
   var selectedaddress = "";
 
   fetchaddress() {
-    var presiststorage = jsonDecode(LocalPreference.getProfile()!);
-    alladdress = presiststorage["address"];
-    notifyListeners();
+    if (LocalPreference.getaddress() != null) {
+      List presiststorage = jsonDecode(LocalPreference.getaddress()!);
+      alladdress = presiststorage;
+      notifyListeners();
+    }
   }
 
   addaddress(data) {
-    var presiststorage = jsonDecode(LocalPreference.getProfile()!);
-    presiststorage["address"].add(data);
-    LocalPreference.setProfile(jsonEncode(presiststorage));
-    fetchaddress();
+    if (LocalPreference.getaddress() == null) {
+      LocalPreference.setaddress(jsonEncode([data]));
+      fetchaddress();
+    } else {
+      List presiststorage = jsonDecode(LocalPreference.getaddress()!);
+      presiststorage.add(data);
+      LocalPreference.setaddress(jsonEncode(presiststorage));
+      fetchaddress();
+    }
   }
 
   removeaddress(index) {
-    var presiststorage = jsonDecode(LocalPreference.getProfile()!);
-    presiststorage["address"].removeAt(index);
+    List presiststorage = jsonDecode(LocalPreference.getaddress()!);
+    presiststorage.removeAt(index);
     LocalPreference.setProfile(jsonEncode(presiststorage));
     fetchaddress();
   }
