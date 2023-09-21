@@ -5,6 +5,7 @@ import 'package:neostore/core/utils/shared_preference.dart';
 import 'package:neostore/viewmodel/cart/cartprovider.dart';
 
 import '../../core/utils/staticdata.dart';
+import '../../viewmodel/order/orderpro.dart';
 
 class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
@@ -27,7 +28,7 @@ class _OrderPageState extends State<OrderPage> {
         ],
       ),
       body: Consumer(builder: (context, ref, child) {
-        var allorders = ref.watch(cartprovider).allorder;
+        var allorders = ref.watch(orderprovider).allorder;
         return ListView.builder(
           itemCount: allorders.length,
           itemBuilder: (context, index) {
@@ -89,7 +90,7 @@ class _OrderPageState extends State<OrderPage> {
                   ],
                 ),
                 onTap: () {
-                  ref.read(cartprovider).orderdetailed(
+                  ref.read(orderprovider).orderdetailed(
                       LocalPreference.getToken(), singleorder['id']);
                   Navigator.pushNamed(context, RoutePaths.orderdetailedpage,
                       arguments: singleorder['id']);

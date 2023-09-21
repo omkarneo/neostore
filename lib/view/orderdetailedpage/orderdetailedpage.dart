@@ -4,6 +4,7 @@ import 'package:neostore/view/orderdetailedpage/widget/ordertile.dart';
 
 import '../../core/utils/staticdata.dart';
 import '../../viewmodel/cart/cartprovider.dart';
+import '../../viewmodel/order/orderpro.dart';
 
 class OrderDetailedPage extends ConsumerStatefulWidget {
   final id;
@@ -22,19 +23,19 @@ class _OrderDetailedPageState extends ConsumerState<OrderDetailedPage> {
           backgroundColor: colorPrimary,
           shadowColor: Colors.transparent,
           title: Text(
-              "Order ID : ${ref.watch(cartprovider).orderdetailedd['id']}"),
+              "Order ID : ${ref.watch(orderprovider).orderdetailedd['id']}"),
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))
           ],
         ),
-        body: (widget.id == ref.watch(cartprovider).orderdetailedd['id'])
+        body: (widget.id == ref.watch(orderprovider).orderdetailedd['id'])
             ? Column(children: [
                 SizedBox(
                     width: MediaQuery.sizeOf(context).width,
                     height: MediaQuery.sizeOf(context).height / 1.3,
                     child: ListView.separated(
                       itemCount: ref
-                          .watch(cartprovider)
+                          .watch(orderprovider)
                           .orderdetailedd["order_details"]
                           .length,
                       separatorBuilder: (context, index) => Container(
@@ -43,7 +44,7 @@ class _OrderDetailedPageState extends ConsumerState<OrderDetailedPage> {
                       ),
                       itemBuilder: (context, index) => Ordertile(
                           data: ref
-                              .watch(cartprovider)
+                              .watch(orderprovider)
                               .orderdetailedd['order_details'][index]),
                     )),
                 Container(
@@ -64,7 +65,7 @@ class _OrderDetailedPageState extends ConsumerState<OrderDetailedPage> {
                               fontSize: 18, fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          "₹ ${ref.watch(cartprovider).orderdetailedd['cost']}",
+                          "₹ ${ref.watch(orderprovider).orderdetailedd['cost']}",
                           style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w500),
                         )
@@ -78,7 +79,9 @@ class _OrderDetailedPageState extends ConsumerState<OrderDetailedPage> {
                 ),
               ])
             : Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: colorPrimary,
+                ),
               ));
   }
 }

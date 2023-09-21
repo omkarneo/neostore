@@ -7,6 +7,7 @@ import 'package:neostore/viewmodel/cart/cartprovider.dart';
 import 'package:neostore/viewmodel/dashboard/dashboardprovider.dart';
 
 import '../../../core/Navigation/route_paths.dart';
+import '../../../viewmodel/order/orderpro.dart';
 import '../../../viewmodel/product/productspro.dart';
 import 'menu_tile.dart';
 
@@ -177,7 +178,7 @@ class _MenuState extends State<Menu> {
                           icon: Icons.paste,
                           action: () {
                             ref
-                                .read(cartprovider)
+                                .read(orderprovider)
                                 .orderlist(LocalPreference.getToken());
                             Navigator.pushNamed(
                               context,

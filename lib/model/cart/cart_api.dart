@@ -63,28 +63,4 @@ class CartApiService {
         ));
     return res.data;
   }
-
-  orderlistservice(token) async {
-    var res = await dio.get("$baseurl/trainingapp/api/orderList",
-        options: Options(
-          headers: {"access_token": token},
-          validateStatus: (_) => true,
-          contentType: Headers.jsonContentType,
-          responseType: ResponseType.json,
-        ));
-
-    return res.data;
-  }
-
-  orderdetailedservice(token, id) async {
-    var res = await dio.get("$baseurl/trainingapp/api/orderDetail?order_id=$id",
-        options: Options(
-          headers: {"access_token": token},
-          validateStatus: (_) => true,
-          contentType: Headers.jsonContentType,
-          responseType: ResponseType.json,
-        ));
-
-    return res.data;
-  }
 }
