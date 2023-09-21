@@ -9,4 +9,5 @@ class RoutePaths {
   static const String orderdetailedpage = "/orderdetailedpage";
   static const String addresspage = "/addresspage";
   static const String addressaddpage = "/addressaddpage";
+  static const String storelocatorpage = "/storelocatorpage";
 }

@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/utils/shared_preference.dart';
 import 'package:neostore/viewmodel/cart/cartprovider.dart';
 import 'package:neostore/viewmodel/dashboard/dashboardprovider.dart';
-
 import '../../../core/Navigation/route_paths.dart';
 import '../../../viewmodel/order/orderpro.dart';
 import '../../../viewmodel/product/productspro.dart';
@@ -171,7 +169,15 @@ class _MenuState extends State<Menu> {
                         Menutile(
                           name: "Store Locator",
                           icon: Icons.location_on,
-                          action: () {},
+                          action: () {
+                            Navigator.pushNamed(
+                              context,
+                              RoutePaths.storelocatorpage,
+                            );
+                            ref
+                                .watch(dashboardpro)
+                                .Collapsed(widget.controller);
+                          },
                         ),
                         Menutile(
                           name: "My Orders",

@@ -6,6 +6,7 @@ import 'package:neostore/view/orderdetailedpage/orderdetailedpage.dart';
 import 'package:neostore/view/orderpage/orderpage.dart';
 import 'package:neostore/view/productlistpage/productlistpage.dart';
 import 'package:neostore/view/registerpage/registerpage.dart';
+import 'package:neostore/view/storelocatorpage/storelocatorpage.dart';
 import '../../view/addressadd/addressaddpage.dart';
 import '../../view/dashboard/dashboard.dart';
 import '../../view/loginpage/loginpage.dart';
@@ -80,6 +81,11 @@ class AppRouter {
         return CupertinoPageRoute(
           builder: (context) => const AddressAddPage(),
           settings: const RouteSettings(name: RoutePaths.addressaddpage),
+        );
+      case RoutePaths.storelocatorpage:
+        return CupertinoPageRoute(
+          builder: (context) => const StoreLocator(),
+          settings: const RouteSettings(name: RoutePaths.storelocatorpage),
         );
 
       // -------------- Default Route -------------
