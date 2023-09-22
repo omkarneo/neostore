@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neostore/core/utils/shared_preference.dart';
+import 'package:neostore/viewmodel/account/account_pro.dart';
 import 'package:neostore/viewmodel/cart/cartprovider.dart';
 import 'package:neostore/viewmodel/dashboard/dashboardprovider.dart';
 import '../../../core/Navigation/route_paths.dart';
@@ -38,6 +39,7 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+    print(profile['photo'].runtimeType);
     return SlideTransition(
       position: widget.slideAnimation,
       child: ScaleTransition(
@@ -61,10 +63,12 @@ class _MenuState extends State<Menu> {
                               child: Container(
                                 width: 100,
                                 height: 100,
-                                decoration: const BoxDecoration(
+                                decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        image: NetworkImage(
-                                            "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
+                                        image: NetworkImage((profile['photo'] !=
+                                                "")
+                                            ? profile['photo']
+                                            : "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
                                         fit: BoxFit.cover)),
                               ),
                             ),
@@ -166,6 +170,9 @@ class _MenuState extends State<Menu> {
                           name: "My Account",
                           icon: Icons.person,
                           action: () {
+                            ref
+                                .read(accountprovider)
+                                .fetchuser(LocalPreference.getToken());
                             Navigator.pushNamed(
                               context,
                               RoutePaths.accountpage,

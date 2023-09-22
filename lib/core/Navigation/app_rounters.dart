@@ -97,8 +97,11 @@ class AppRouter {
         );
       case RoutePaths.editaccountpage:
         return CupertinoPageRoute(
-          builder: (context) => const EditProfile(),
-          settings: const RouteSettings(name: RoutePaths.editaccountpage),
+          builder: (context) => EditProfile(
+            userdata: settings.arguments,
+          ),
+          settings: RouteSettings(
+              name: RoutePaths.editaccountpage, arguments: settings.arguments),
         );
       case RoutePaths.resetpasswordpage:
         return CupertinoPageRoute(
