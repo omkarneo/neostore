@@ -10,4 +10,7 @@ class RoutePaths {
   static const String addresspage = "/addresspage";
   static const String addressaddpage = "/addressaddpage";
   static const String storelocatorpage = "/storelocatorpage";
+  static const String accountpage = "/accountpage";
+  static const String editaccountpage = "/editaccountpage";
+  static const String resetpasswordpage = "/resetpasswordpage";
 }

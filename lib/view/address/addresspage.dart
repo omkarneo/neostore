@@ -18,7 +18,6 @@ class AddressPage extends StatefulWidget {
 }
 
 class _AddressPageState extends State<AddressPage> {
-  var address;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

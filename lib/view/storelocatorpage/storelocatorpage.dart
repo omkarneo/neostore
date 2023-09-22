@@ -35,7 +35,7 @@ class _StoreLocatorState extends State<StoreLocator> {
           height: MediaQuery.sizeOf(context).height / 2,
           child: ListView(
             children: [
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.pin_drop, size: 50),
                 title: Padding(
                   padding: EdgeInsets.all(5.0),
@@ -57,7 +57,7 @@ class _StoreLocatorState extends State<StoreLocator> {
                 height: 1,
                 color: Colors.grey,
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.pin_drop, size: 50),
                 title: Padding(
                   padding: EdgeInsets.all(5.0),
@@ -79,7 +79,7 @@ class _StoreLocatorState extends State<StoreLocator> {
                 height: 1,
                 color: Colors.grey,
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.pin_drop, size: 50),
                 title: Padding(
                   padding: EdgeInsets.all(5.0),
@@ -101,7 +101,7 @@ class _StoreLocatorState extends State<StoreLocator> {
                 height: 1,
                 color: Colors.grey,
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.pin_drop, size: 50),
                 title: Padding(
                   padding: EdgeInsets.all(5.0),

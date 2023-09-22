@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
+import 'package:neostore/view/editprofile/editprofile.dart';
+import 'package:neostore/view/myaccount/myaccount.dart';
 import 'package:neostore/view/address/addresspage.dart';
 import 'package:neostore/view/cartpage/cartpage.dart';
 import 'package:neostore/view/orderdetailedpage/orderdetailedpage.dart';
@@ -11,6 +13,7 @@ import '../../view/addressadd/addressaddpage.dart';
 import '../../view/dashboard/dashboard.dart';
 import '../../view/loginpage/loginpage.dart';
 import '../../view/productdetailed/productdetailedpage.dart';
+import '../../view/resetpassword/resetpassword.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -86,6 +89,21 @@ class AppRouter {
         return CupertinoPageRoute(
           builder: (context) => const StoreLocator(),
           settings: const RouteSettings(name: RoutePaths.storelocatorpage),
+        );
+      case RoutePaths.accountpage:
+        return CupertinoPageRoute(
+          builder: (context) => const AccountPage(),
+          settings: const RouteSettings(name: RoutePaths.accountpage),
+        );
+      case RoutePaths.editaccountpage:
+        return CupertinoPageRoute(
+          builder: (context) => const EditProfile(),
+          settings: const RouteSettings(name: RoutePaths.editaccountpage),
+        );
+      case RoutePaths.resetpasswordpage:
+        return CupertinoPageRoute(
+          builder: (context) => const ResetPasswordPage(),
+          settings: const RouteSettings(name: RoutePaths.resetpasswordpage),
         );
 
       // -------------- Default Route -------------

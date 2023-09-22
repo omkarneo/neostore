@@ -165,7 +165,15 @@ class _MenuState extends State<Menu> {
                         Menutile(
                           name: "My Account",
                           icon: Icons.person,
-                          action: () {},
+                          action: () {
+                            Navigator.pushNamed(
+                              context,
+                              RoutePaths.accountpage,
+                            );
+                            ref
+                                .watch(dashboardpro)
+                                .collapsed(widget.controller);
+                          },
                         ),
                         Menutile(
                           name: "Store Locator",
