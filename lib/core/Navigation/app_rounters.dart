@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:neostore/core/Navigation/route_paths.dart';
 import 'package:neostore/view/editprofile/editprofile.dart';
+import 'package:neostore/view/forgotpassword/forgotpassword.dart';
 import 'package:neostore/view/myaccount/myaccount.dart';
 import 'package:neostore/view/address/addresspage.dart';
 import 'package:neostore/view/cartpage/cartpage.dart';
@@ -107,6 +108,11 @@ class AppRouter {
         return CupertinoPageRoute(
           builder: (context) => const ResetPasswordPage(),
           settings: const RouteSettings(name: RoutePaths.resetpasswordpage),
+        );
+      case RoutePaths.forgotpasswordpage:
+        return CupertinoPageRoute(
+          builder: (context) => const ForgotPassword(),
+          settings: const RouteSettings(name: RoutePaths.forgotpasswordpage),
         );
 
       // -------------- Default Route -------------

@@ -14,4 +14,16 @@ class LoginApiservices {
 
     return res.data;
   }
+
+  forgotpasswordservice(formdata) async {
+    var res = await dio.post("$baseurl/trainingapp/api/users/forgot",
+        data: formdata,
+        options: Options(
+          validateStatus: (_) => true,
+          contentType: Headers.jsonContentType,
+          responseType: ResponseType.json,
+        ));
+
+    return res.data;
+  }
 }

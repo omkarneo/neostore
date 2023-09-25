@@ -35,4 +35,11 @@ class Login extends ChangeNotifier {
     }
     return data;
   }
+
+  forgotpassword(map) async {
+    var formdata = FormData.fromMap(map);
+    // print(formdata);
+    var res = await apiservices.login(formdata);
+    return jsonDecode(res);
+  }
 }

@@ -13,4 +13,5 @@ class RoutePaths {
   static const String accountpage = "/accountpage";
   static const String editaccountpage = "/editaccountpage";
   static const String resetpasswordpage = "/resetpasswordpage";
+  static const String forgotpasswordpage = "/forgotpasswordpage";
 }

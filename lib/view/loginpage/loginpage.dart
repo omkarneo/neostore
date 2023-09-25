@@ -165,13 +165,19 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: Text("Forgot Password?",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.white)),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: InkWell(
+                          child: const Text("Forgot Password?",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.white)),
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, RoutePaths.forgotpasswordpage);
+                          },
+                        ),
                       ),
                     ],
                   ),
