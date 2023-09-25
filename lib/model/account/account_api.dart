@@ -27,4 +27,17 @@ class AccountApiservices {
 
     return res.data;
   }
+
+  resetpasswordservice(token, formdata) async {
+    var res = await dio.post("$baseurl/trainingapp/api/users/change",
+        data: formdata,
+        options: Options(
+          headers: {"access_token": token},
+          validateStatus: (_) => true,
+          contentType: Headers.jsonContentType,
+          responseType: ResponseType.json,
+        ));
+
+    return res.data;
+  }
 }

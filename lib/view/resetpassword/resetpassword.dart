@@ -1,5 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:neostore/core/Navigation/route_paths.dart';
+import 'package:neostore/core/utils/shared_preference.dart';
 import 'package:neostore/view/resetpassword/widget/resetinput.dart';
+import 'package:neostore/viewmodel/account/account_pro.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({super.key});
@@ -65,17 +71,40 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         const SizedBox(
           height: 30,
         ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xffffffff),
-              fixedSize: Size(MediaQuery.sizeOf(context).width - 40, 60),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10))),
-          child: const Text(
-            "RESET PASSWORD",
-            style: TextStyle(fontSize: 20, color: Color(0xffE91C1A)),
+        Consumer(
+          builder: (context, ref, child) => ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xffffffff),
+                fixedSize: Size(MediaQuery.sizeOf(context).width - 40, 60),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10))),
+            child: const Text(
+              "RESET PASSWORD",
+              style: TextStyle(fontSize: 20, color: Color(0xffE91C1A)),
+            ),
+            onPressed: () async {
+              var data = await ref.read(accountprovider).resetpassword({
+                "old_password": oldpass.text,
+                "password": newpass.text,
+                "confirm_password": conpass.text
+              }, LocalPreference.getToken());
+              print(data.runtimeType);
+              var snackBar;
+              if (data['status'] == 200) {
+                snackBar = SnackBar(
+                  content: Text(data['user_msg']),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, RoutePaths.dashboard, (route) => false);
+              } else {
+                snackBar = SnackBar(
+                  content: Text(data['user_msg']),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+            },
           ),
-          onPressed: () async {},
         ),
       ]),
     );

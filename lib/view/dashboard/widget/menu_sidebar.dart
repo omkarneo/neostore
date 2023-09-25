@@ -39,7 +39,6 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
-    print(profile['photo'].runtimeType);
     return SlideTransition(
       position: widget.slideAnimation,
       child: ScaleTransition(

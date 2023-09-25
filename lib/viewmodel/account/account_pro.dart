@@ -41,6 +41,14 @@ class Account extends ChangeNotifier {
     }
   }
 
+  resetpassword(map, token) async {
+    var formdata = FormData.fromMap(map);
+    var res = await apiservices.resetpasswordservice(token, formdata);
+    Map contomap = jsonDecode(res);
+    print(contomap);
+    return contomap;
+  }
+
   selectimage(val) {
     editimage = val;
     firstflag = true;

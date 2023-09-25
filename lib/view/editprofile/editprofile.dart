@@ -11,7 +11,6 @@ import 'package:neostore/core/utils/shared_preference.dart';
 import 'package:neostore/core/utils/staticdata.dart';
 import 'package:neostore/view/editprofile/widget/editprofileinput.dart';
 import 'package:neostore/viewmodel/account/account_pro.dart';
-import 'package:neostore/viewmodel/address/addresspro.dart';
 
 class EditProfile extends StatefulWidget {
   final userdata;
@@ -89,7 +88,10 @@ class _EditProfileState extends State<EditProfile> {
                         image: DecorationImage(
                           image: (ref.watch(accountprovider).firstflag)
                               ? MemoryImage(base64Decode(data)) as ImageProvider
-                              : NetworkImage(data),
+                              : (data != "")
+                                  ? NetworkImage(data)
+                                  : const NetworkImage(
+                                      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"),
                           fit: BoxFit.fill,
                           colorFilter: ColorFilter.mode(
                               Colors.black.withOpacity(0.7), BlendMode.dstATop),

@@ -8,10 +8,12 @@ import 'core/Navigation/app_rounters.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocalPreference.init();
-
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+  if (LocalPreference.getProfile() == null) {
+    LocalPreference.setProfile("");
+  }
   runApp(const MainApp());
 }
 
