@@ -19,7 +19,7 @@ class _TopDetailedConatinerState extends State<TopDetailedConatiner> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.sizeOf(context).width,
-      height: MediaQuery.sizeOf(context).height / 7.35,
+      height: MediaQuery.sizeOf(context).height / 7,
       color: colorPrimaryText,
       child: Padding(
         padding: const EdgeInsets.all(18.0),

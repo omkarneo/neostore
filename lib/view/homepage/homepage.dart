@@ -90,62 +90,73 @@ class _HomePageState extends State<HomePage> {
                 }).toList(),
               ),
             ),
-            Expanded(
-              flex: 3,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: SizedBox(
-                    width: MediaQuery.sizeOf(context).width,
-                    child: Consumer(
-                      builder: (context, ref, child) => Row(
-                        children: [
-                          Column(
-                            children: [
-                              InkWell(
-                                child: const TableBox(),
-                                onTap: () {
-                                  ref.read(productprovider).fetchproducts("1");
-                                  Navigator.pushNamed(
-                                      context, RoutePaths.productlist,
-                                      arguments: "1");
-                                },
-                              ),
-                              InkWell(
-                                child: const ChairsBox(),
-                                onTap: () {
-                                  ref.read(productprovider).fetchproducts("2");
-                                  Navigator.pushNamed(
-                                      context, RoutePaths.productlist,
-                                      arguments: "2");
-                                },
-                              )
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              InkWell(
-                                child: const SofasBox(),
-                                onTap: () {
-                                  ref.read(productprovider).fetchproducts("3");
-                                  Navigator.pushNamed(
-                                      context, RoutePaths.productlist,
-                                      arguments: "3");
-                                },
-                              ),
-                              InkWell(
-                                child: const CupBoardBox(),
-                                onTap: () {
-                                  ref.read(productprovider).fetchproducts("5");
-                                  Navigator.pushNamed(
-                                      context, RoutePaths.productlist,
-                                      arguments: "5");
-                                },
-                              )
-                            ],
-                          )
-                        ],
+            Consumer(
+              builder: (context, ref, child) => Expanded(
+                flex: 3,
+                child: AbsorbPointer(
+                  absorbing: !ref.watch(dashboardpro).isCollapsed,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: SizedBox(
+                        width: MediaQuery.sizeOf(context).width,
+                        child: Row(
+                          children: [
+                            Column(
+                              children: [
+                                InkWell(
+                                  child: const TableBox(),
+                                  onTap: () {
+                                    ref
+                                        .read(productprovider)
+                                        .fetchproducts("1");
+                                    Navigator.pushNamed(
+                                        context, RoutePaths.productlist,
+                                        arguments: "1");
+                                  },
+                                ),
+                                InkWell(
+                                  child: const ChairsBox(),
+                                  onTap: () {
+                                    ref
+                                        .read(productprovider)
+                                        .fetchproducts("2");
+                                    Navigator.pushNamed(
+                                        context, RoutePaths.productlist,
+                                        arguments: "2");
+                                  },
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                InkWell(
+                                  child: const SofasBox(),
+                                  onTap: () {
+                                    ref
+                                        .read(productprovider)
+                                        .fetchproducts("3");
+                                    Navigator.pushNamed(
+                                        context, RoutePaths.productlist,
+                                        arguments: "3");
+                                  },
+                                ),
+                                InkWell(
+                                  child: const CupBoardBox(),
+                                  onTap: () {
+                                    ref
+                                        .read(productprovider)
+                                        .fetchproducts("5");
+                                    Navigator.pushNamed(
+                                        context, RoutePaths.productlist,
+                                        arguments: "5");
+                                  },
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),

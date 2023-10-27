@@ -53,7 +53,7 @@ class _PhotoDescriptionState extends ConsumerState<PhotoDescription> {
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       width: MediaQuery.sizeOf(context).width / 1.5,
-                      height: MediaQuery.sizeOf(context).width / 2,
+                      height: MediaQuery.sizeOf(context).width / 2.5,
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: NetworkImage(widget.data.product_images[

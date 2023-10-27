@@ -30,7 +30,7 @@ class _CupBoardBoxState extends State<CupBoardBox> {
                       "Dinning Sets",
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 26,
+                          fontSize: 25,
                           fontWeight: FontWeight.w500),
                     ),
                   )
