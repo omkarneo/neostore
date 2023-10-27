@@ -23,12 +23,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<String> imgList = [
-    "assets/images/6.jpg",
-    "assets/images/2.jpeg",
-    "assets/images/3.jpeg",
-    "assets/images/4.jpeg"
-  ];
+  final List<String> imgList = ["assets/images/3.jpeg", "assets/images/4.jpeg"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
